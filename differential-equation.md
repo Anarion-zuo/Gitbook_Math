@@ -445,3 +445,150 @@ The difference between transform and operator is, obviously, that transform give
 $$
 \ell(f+g)=\ell(f)+\ell(g),\ell(cf)=c\ell(f)
 $$
+
+### Exponential Shift
+
+$$
+\ell(e^{at}f(t))=\int_0^\infty e^{-(s-a)t}f(t)dt=F(s-a),\text{ when }s>0
+$$
+
+Also holds for exponential:
+$$
+e^{(a+bi)t}\rightarrow\frac{1}{s-(a+bi)}
+$$
+Hence, for sin and cos:
+$$
+\cos at=\frac{e^{iat}+e^{-iat}}{2}=\frac{\frac{1}{s-ia}+\frac{1}{s+ia}}{2}=\frac{s}{s^2+a^2},\sin at=\frac{a}{s^2+a^2}
+$$
+
+### Polynomial
+
+$$
+\int_0^\infty t^ne^{-st}dt
+$$
+
+| $t^n$     | $nt^{n-1}$            | …    | 1                            | 0                                    |
+| --------- | --------------------- | ---- | ---------------------------- | ------------------------------------ |
+| $e^{-st}$ | $-\frac{1}{s}e^{-st}$ | …    | $(-1)^n\frac{1}{s^n}e^{-st}$ | $(-1)^{n+1}\frac{1}{s^{n+1}}e^{-st}$ |
+
+For the first term in the partial integral operation:
+$$
+\lim_{t\rightarrow\infty}\frac{t^ne^{-st}}{s}=0
+$$
+Therefore:
+$$
+\int_0^\infty t^ne^{-st}dt=\frac{n}{s}\int_0^\infty t^{n-1}e^{-st}dt
+$$
+Hereby gets a reduction form. Finally:
+$$
+\ell(t^n)=\frac{n!}{s^{n+1}}
+$$
+
+### Condition of Existence
+
+There is some constant $c,k>0$,
+$$
+|f(t)|\le ce^{kt}
+$$
+In other word:
+$$
+\frac{|f(t)|}{e^{kt}}\text{ exists every where no matter how big is }k
+$$
+
+### Inverse Transform
+
+For fractional polynomials, do the partial fraction operation and find the inverse by exponential shift.
+$$
+\frac{1}{s(s+3)}=\frac{1}{3}(\frac{1}{s}-\frac{1}{s+3})\rightarrow\frac{1}{3}(1-e^{-3t})
+$$
+
+### Solve Equations
+
+$$
+y''+Ay'+By=h(t)
+$$
+
+The initial condition has to be specified at first.
+$$
+y(0)=y_0,y'(0)=y'_0
+$$
+The Laplace transform of the response $Y(s)$ is always some fractional polynomial $\frac{p(s)}{q(s)}$. Apply the inverse transform then get the answer. Before everything else, we want to find out the derivative form of Laplace transform by partial integration.
+$$
+\ell(f'(t))=\int_0^\infty e^{-st}f'(t)dt=-f(0)+\int_0^\infty se^{-st}f(t)dt=sF(s)-f(0)
+$$
+For second derivative:
+$$
+\ell(f''(t))=s\ell(f'(t))-f'(0)=s^2F(s)-sf(0)-f'(0)
+$$
+For nth derivative:
+$$
+F_n(s)=sF_{n-1}(s)-f^{(n-1)}(0)
+$$
+Now since the formula table is complete, we can have an example.
+$$
+y''-y=e^{-t},y(0)=1,y'(0)=0
+$$
+
+1. Apply Laplace transform upon the whole equation.
+   $$
+   (s^2-1)Y=\frac{1+s+s^2}{s+1},Y=\frac{s^2+s+1}{(s+1)^2(s-1)}
+   $$
+
+2. Partial fraction and find the inverse transform.
+   $$
+   \frac{s^2+s+1}{(s+1)^2(s-1)}=\frac{-1/2}{(s+1)^2}+\frac{1/4}{s+1}+\frac{3/4}{s-1}
+   $$
+
+   $$
+   y=-\frac{1}{4}e^{-t}+\frac{3}{4}e^t
+   $$
+
+## Convolution
+
+The introduction to convolution is to find a certain transform from $f,g$ to the product of their Laplace transform result. It is hereby defined.
+$$
+F(s)G(s)=\int_0^\infty e^{-st}(f*g)dt
+$$
+Following the idea of coming from discrete world to continuous world, the behavior of power series, when multiplied, can be the reference to the convolution operation.
+$$
+F(x)=\sum_{n=0}^\infty a_nx^n,G(x)=\sum_{n=0}^\infty b_nx^n,F(x)G(x)=\sum_{n=0}^\infty c_nx^n
+$$
+The convolution formula is:
+$$
+f(t)*g(t)=\int_0^tf(u)g(t-u)du
+$$
+Some property can be easily proofed:
+$$
+f*g=g*f
+$$
+
+### Proof of Convolution
+
+Convert the problem into double integral:
+$$
+F(s)G(s)=\int_0^\infty e^{-su}f(u)du\times\int_0^\infty e^{-sv}g(v)dv=\int_0^\infty\int_0^\infty e^{-s(u+v)}f(u)g(v)dudv
+$$
+Suppose $t=u+v$, eliminate $v​$ in the formula:
+$$
+\int_0^\infty\int_0^\infty e^{-s(u+v)}f(u)g(v)dudv=\int_0^\infty\int_0^t e^{-st}f(u)g(t-u)dudt
+$$
+2 things require some thoughts:
+
+1. The change of variable from $u,v$ to $u,t$ results in a new coefficient before $du,dt$.
+   $$
+   dudv=\frac{\partial(u,v)}{\partial(u,t)}dudt=dudt
+   $$
+
+2. The integral limit of $u$ changes to having upper bound $t$.
+
+### Example: Radioactive Dumping
+
+Suppose there is some radioactive waste needing to be dumped. Define $f(t)$ to be the dump rate where $t$ signifies years. $f(t)$ means between 2 close enough time point $t_i,t_{i+1}$ the amount of waste newly dumped.
+$$
+f(t)\Delta t=\Delta F(t)
+$$
+For a certain amount of radioactive substance, its mass obeys the law of:
+$$
+m=A_0e^{-kt}
+$$
+where $A_0$ is the initial amount and $k​$ is a certain constant corresponding to a certain kind of material. 
