@@ -439,17 +439,17 @@ x\in(0,1)
 $$
 In general, Laplace transform is:
 $$
-\int_0^\infty f(t)e^{-st}dt=F(s),\ell(f(t))=F(s),s>0
+\int_0^\infty f(t)e^{-st}dt=F(s),\mathscr{L}(f(t))=F(s),s>0
 $$
 The difference between transform and operator is, obviously, that transform gives a function to another variable while operator does not change the variable of the input. Laplace transform is a linear transform, integration itself is a mean of linear transform.
 $$
-\ell(f+g)=\ell(f)+\ell(g),\ell(cf)=c\ell(f)
+\mathscr{L}(f+g)=\mathscr{L}(f)+\mathscr{L}(g),\mathscr{L}(cf)=c\mathscr{L}(f)
 $$
 
 ### Exponential Shift
 
 $$
-\ell(e^{at}f(t))=\int_0^\infty e^{-(s-a)t}f(t)dt=F(s-a),\text{ when }s>0
+\mathscr{L}(e^{at}f(t))=\int_0^\infty e^{-(s-a)t}f(t)dt=F(s-a),\text{ when }s>0
 $$
 
 Also holds for exponential:
@@ -481,7 +481,7 @@ $$
 $$
 Hereby gets a reduction form. Finally:
 $$
-\ell(t^n)=\frac{n!}{s^{n+1}}
+\mathscr{L}(t^n)=\frac{n!}{s^{n+1}}
 $$
 
 ### Condition of Existence
@@ -514,11 +514,11 @@ y(0)=y_0,y'(0)=y'_0
 $$
 The Laplace transform of the response $Y(s)$ is always some fractional polynomial $\frac{p(s)}{q(s)}$. Apply the inverse transform then get the answer. Before everything else, we want to find out the derivative form of Laplace transform by partial integration.
 $$
-\ell(f'(t))=\int_0^\infty e^{-st}f'(t)dt=-f(0)+\int_0^\infty se^{-st}f(t)dt=sF(s)-f(0)
+\mathscr{L}(f'(t))=\int_0^\infty e^{-st}f'(t)dt=-f(0)+\int_0^\infty se^{-st}f(t)dt=sF(s)-f(0)
 $$
 For second derivative:
 $$
-\ell(f''(t))=s\ell(f'(t))-f'(0)=s^2F(s)-sf(0)-f'(0)
+\mathscr{L}(f''(t))=s\mathscr{L}(f'(t))-f'(0)=s^2F(s)-sf(0)-f'(0)
 $$
 For nth derivative:
 $$
@@ -543,9 +543,42 @@ $$
    y=-\frac{1}{4}e^{-t}+\frac{3}{4}e^t
    $$
 
+### Jump Discontinuities
+
+The classic example is the unit jump function:
+$$
+u(t)=\begin{cases}0&t<0\\1&t>0\\undefined&t=0\end{cases}
+$$
+To generalize it:
+$$
+u_a(t)=u(t-a)
+$$
+Further more, the unit box function:
+$$
+u_{ab}(t)=u_a(t)-u_b(t)
+$$
+By multiplying the unit box function to another arbitrary function, we can wipe out the other parts of the function except for a certain interval. It is obvious that the Laplace transform of $u(t)$ is $\frac{1}{s}$. However, the real question is: what is the inverse transform of $\frac{1}{s}$? Such kind of problem may occur for many other functions, where the negative variable is not taken care of. In order to prevent ambiguousness, we define that all of the result of inverse transform is some function times the unit step function and we do not care about the negative half.
+
+#### An Important Fact
+
+There is no such way of describing $\mathscr{L}(f(t-a)),a>0$ in terms of $\mathscr{L}(f(t))$, for there is a part of the function that the transform has never seen or taken into consideration. When taking Laplace transform, we automatically abandon the information in the negative half. If accepting the fact that the information cannot be recovered, we can write down the right formula.
+$$
+\mathscr{L}(u_a(t)f(t-a))=e^{-as}\mathscr{L}(f(t))
+$$
+Formal calculation:
+$$
+\mathscr{L}(u_a(t)f(t-a))=e^{-sa}\int_{-a}^\infty e^{-st}u(t)f(t)dt=e^{-sa}\int_{0}^\infty e^{-st}u(t)f(t)dt
+$$
+
+#### Unit Box Function
+
+$$
+\mathscr{L}(u_{ab}(t))=\mathscr{L}(u(t-a))-\mathscr{L}(u(t-b))=\frac{e^{-as}-e^{-bs}}{s}
+$$
+
 ## Convolution
 
-The introduction to convolution is to find a certain transform from $f,g$ to the product of their Laplace transform result. It is hereby defined.
+The introduction to convolution is to find a certain transform from $f,g​$ to the product of their Laplace transform result. It is hereby defined.
 $$
 F(s)G(s)=\int_0^\infty e^{-st}(f*g)dt
 $$
@@ -591,4 +624,357 @@ For a certain amount of radioactive substance, its mass obeys the law of:
 $$
 m=A_0e^{-kt}
 $$
-where $A_0$ is the initial amount and $k​$ is a certain constant corresponding to a certain kind of material. 
+where $A_0$ is the initial amount and $k$ is a certain constant corresponding to a certain kind of material. 
+
+At a certain point of time $u_i$, the dumping amount is $f(u_i)\Delta u$, while the time that already has passed is $t-u_i$. The total amount of waste left counting from the first time of dumping is:
+$$
+\lim_{\Delta u\rightarrow0}\sum_{i=1}^\infty f(u_i)e^{-k(t-u_i)}\Delta u=\int_0^tf(u)e^{-k(t-u)}du=f(t)*e^{-kt}
+$$
+For a special condition, where the waste does not decay, the answer becomes a simple integral.
+
+## Impulse
+
+In Physics or other subjects, there may be some signal with valid input only in a interval of time.
+$$
+u_{ab}f(t)
+$$
+We call that a impulse. Here we only talk about unit impulse, which has integral result 1 and constant value.
+$$
+imp(t)=\frac{1}{h}u_{oh}(t)=\frac{1}{h}[u(t)-u(t-h)],\mathscr{L}(imp)=\frac{1-e^{-hs}}{hs}
+$$
+When $h$ goes to 0, Laplace transform goes to 1. The special function is named Dirac Delta function.
+$$
+\delta(t)=\lim_{h\rightarrow0}\frac{1}{h}[u(t)-u(t-h)]
+$$
+
+### Properties
+
+1. Integral
+   $$
+   \int_{-\infty}^\infty\delta (t)dt=1
+   $$
+
+2. Convolution
+   $$
+   \mathscr{L}(u(t)f(t)*\delta(t))=F(s)
+   $$
+
+3. Integration
+   $$
+   u'(t)=\delta(t)
+   $$
+
+### Resonance
+
+$$
+y''+y=A\delta(t-\frac{\pi}{2}),y(0)=1,y'(0)=0
+$$
+
+$$
+y=\cos t-u(t-\frac{\pi}{2})A\cos t
+$$
+
+# Systems
+
+$$
+\begin{cases}
+x'=ax+by+r_1(t)\\
+y'=cx+dy+r_2(t)
+\end{cases}
+$$
+
+Linear differential equation system holds dependent $x,y$ in linear relation and arbitrarily dealing with the common variable $t$. Homogeneous case is $r_1=r_2=0$. The number of initial state variables must be the same with the number of arbitrary constant in the solution.
+
+## Heat Conduction: Naive Idea
+
+An object consisting of a outer layer, temperature $T_2$, and a inner core, temperature $T_1$ is put into a water tank with a given temperature function $T_e(t)$. The layer and the core has different conductivity of heat.
+$$
+\begin{cases}
+\frac{dT_1}{dt}=a(T_2-T_1)\\
+\frac{dT_2}{dt}=a(T_1-T_2)+b(T_e-T_2)\\
+\end{cases}
+$$
+Take $a=2,b=3,T_e=0,T_1(0)=40,T_2(0)=45$:
+$$
+\begin{cases}
+\frac{dT_1}{dt}=-2T_1+2T_2\\
+\frac{dT_2}{dt}=2T_1-5T_2\\
+\end{cases}
+$$
+Eliminate one of the variables and generate a second order equation:
+$$
+T_2=\frac{1}{2}T_1'+T_1\rightarrow T_1''+7T_1'+6T_1=0
+$$
+Eliminating variables generate an equation of the sum of the order of the others. We trade in different kinds of complexity. The system has to be stable or the long term solution has to be constant, hence the coefficients of the simplified equation above must be positive.
+$$
+T_1=c_1e^{-t}+c_2e^{-6t}
+$$
+Then, $T_2​$ can be easily calculated.
+
+## Autonomous System
+
+No $t$ explicitly shown on the right hand side.
+$$
+\begin{cases}
+x'=f(x,y)\\
+y'=g(x,y)
+\end{cases}
+$$
+The solution is a parameterized curve and the derivative, for a given initial state.
+$$
+\begin{cases}
+x=x(t)\\
+y=y(t)
+\end{cases},\begin{cases}
+x'=x(t)\\
+y'=y(t)
+\end{cases}
+$$
+The derivative can build up a velocity field, also a form of solution.
+
+The equation mentioned above is an autonomous system, which can be solved by variable elimination. In order to derive a more general case for the linear autonomous system, we rewrite the equation in matrix form.
+$$
+\begin{pmatrix}x\\y\end{pmatrix}'=\begin{pmatrix}-2&2\\2&-5\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+$$
+The solution is:
+$$
+\begin{pmatrix}x\\y\end{pmatrix}=c_1\begin{pmatrix}1\\\frac{1}{2}\end{pmatrix}e^{-t}+c_2\begin{pmatrix}1\\-2\end{pmatrix}e^{-6t}
+$$
+From the idea of the matrices form of the solution, we try to find a general method of solving the autonomous equations.
+
+Suppose:
+$$
+\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}a_1\\a_2\end{pmatrix}e^{\lambda t}
+$$
+Substitute this into the equation and solve the algebraic equation like we do in single second order equations. The solution, none 0, of the algebraic linear equation is unique. Therefore the determination of the equation is 0. We hereby solve $\lambda​$. The relation between $a_1,a_2​$ can be obtained by the equation, but not the exact value, which has to be given by the initial state, and if not, the computation process is wrong.
+
+### General Solution
+
+#### $2\times2$
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}'=\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix},\text{suppose }\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}a_1\\a_2\end{pmatrix}e^{\lambda t}
+$$
+
+$a_1,a_2,\lambda$ is given by:
+$$
+\begin{pmatrix}a-\lambda&b\\c&d-\lambda\end{pmatrix}\begin{pmatrix}a_1\\a_2\end{pmatrix}=0
+$$
+The equation is solvable when the coefficient determination is 0, which gives the characteristic equation.
+$$
+\lambda^2-(a+d)\lambda+ad-bc=0
+$$
+
+#### $n\times n$
+
+In general:
+$$
+\begin{pmatrix}x\\\vdots\end{pmatrix}'=A\begin{pmatrix}x\\\vdots\end{pmatrix}
+$$
+$\lambda$s can be given by the eigenvalues of $A$. By solving the system, the eigenvectors belong to $A$ make up of the fundamental solution class of the equation, which form the solution by linear combination. The idea of characteristic equation in differential equation is consistent with the one in linear algebra.
+$$
+\begin{pmatrix}x_1\\x_2\\\vdots\end{pmatrix}=\sum_{i=1}^nc_i\xi_ie^{\lambda_it},\forall\xi\quad\text{independent}
+$$
+
+
+### Duplicated Eigenvalue
+
+Suppose there is a tank full of water separated into 3 parts. Each part contains the same amount of water, separated by barriers conducting heat with the same speed. Suppose the temperature remains constant in connected water and would only differ between the 2 sides of a barrier. The initial state is that the three sub-tanks has the same temperature.
+
+![1551702231390](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1551702231390.png)
+$$
+\begin{cases}
+a&=1\\
+x_1'&=a(x_3-x_1)+a(x_2-x_1)=-2x_1+x_2+x_3\\
+x_2'&=x_1-2x_2+x_3\\
+x_3'&=x_1+x_2-x_3
+\end{cases}
+$$
+Find $\lambda$:
+$$
+\det(A)=\det\begin{pmatrix}-2-\lambda&1&1\\1&-2-\lambda&1\\1&1&-2-\lambda\end{pmatrix},\lambda_1=0,\lambda_2=\lambda_3=-3
+$$
+For $\lambda=0$, we find a constant solution. By common sense in Physics fields, we find the constant solution.
+
+For $\lambda=-3$, find the 2 independent solutions.
+$$
+\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}=c_1\begin{pmatrix}1\\0\\-1\end{pmatrix}e^{-3t}+c_2\begin{pmatrix}1\\-1\\0\end{pmatrix}e^{-3t}+c_3\begin{pmatrix}1\\1\\1\end{pmatrix}
+$$
+
+### Defective Eigenvalue
+
+Sometimes, the coefficient matrix cannot be similar diagonalized, and we want to ask complex numbers for help.
+$$
+\begin{pmatrix}x\\y\end{pmatrix}'=\begin{pmatrix}1&2\\-1&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix},\lambda^2+1=0,\lambda_1=i,\lambda_2=-i
+$$
+The real part of the solution is:
+$$
+x=\cos t,y=-\frac{1}{2}(\cos t+\sin t)
+$$
+It’s an eclipse.
+
+## Inhomogeneous
+
+$$
+\begin{cases}
+x'=ax+by+r_1(t)\\
+y'=cx+dy+r_2(t)
+\end{cases}
+$$
+
+
+
+### Basic Theorem
+
+#### A
+
+The general solution is:
+$$
+\begin{pmatrix}x_1\\x_2\\\vdots\end{pmatrix}=\sum_{i=1}^nc_i\xi_ie^{\lambda_it},\forall\xi\quad\text{independent}
+$$
+The proof consists of 2 parts. The easy part is to prove this is a solution. The hard part is to prove this is the only solution.
+
+#### B: Wronskian of All Solutions
+
+$$
+W(\vec{x_1},\vec{x_2},...,\vec{x_n})=|\vec{x_1},\vec{x_2},...,\vec{x_n}|=\det(\vec{x_1},\vec{x_2},...,\vec{x_n})
+$$
+
+When Wronskian is always 0, the solution is not linearly independent, and when not, is so., obviously. For a set of valid solution vectors, Wronskian is always not 0.
+
+#### C
+
+The final solution computed for the inhomogeneous equations consists of the solution of the homogeneous version, which is the complementary solution, and the particular solution. The key, therefore, is to find the particular solution.
+$$
+\vec{x_{gen}}=\vec{x_{c}}+\vec{x_{p}}
+$$
+
+
+### Fundamental Matrix
+
+Put all solutions in a single matrix:
+$$
+X=(\vec{x_1},\vec{x_2},...,\vec{x_n})
+$$
+
+#### Properties
+
+1. $\det X\ne 0$, for any $t​$.
+2. $X'=AX​$
+
+### Example: Mixing Problem
+
+![1551713519888](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1551713519888.png)
+
+There are these 2 tanks connected at the top and bottom with given fluid rate in numbers. The fluid rate must remain balanced, which means the sum of the input rates and output rates equals, as is shown in the picture. There are some kinds of substances in the fluid. The x tank has input salt solution, while y tank has input pure water. Suppose $x,y​$ correspond to the concentration of the tanks, respectively. The system is described as:
+$$
+\vec{x}'=\begin{pmatrix}-3&2\\3&-4\end{pmatrix}\vec{x}+\begin{pmatrix}5e^{-t}\\0\end{pmatrix}
+$$
+
+### Variation Parameters
+
+It is a classic method to Solve $\vec{x}'=A\vec{x}+\vec{r}$ and Find $\vec{x_p}$. The theorem says look for a solution of such form:
+$$
+\vec{x_p}=v_1(t)\vec{x_1}+v_2(t)\vec{x_2}
+$$
+which is the form of variating arbitrary constant of the solution of homogeneous equations. A more general form:
+$$
+\vec{x_p}=\sum_{i=1}^nv_i(t)\vec{x_i}=X\vec{v}
+$$
+
+Then substitute into the system:
+$$
+X'\vec{v}+X\vec{v}'=\vec{x_p}'=A\vec{x_p}+\vec{r}=AX\vec{v}+\vec{r}\Rightarrow X\vec{v}'=\vec{r},\text{ where }\exists X^{-1}
+$$
+There, a particular solution is found.
+$$
+\vec{x_p}=X\int X^{-1}\vec{r}dt
+$$
+The general solution is the linear expansion of a fundamental matrix.
+$$
+\vec{x}=XC
+$$
+where $C\ne 0$ consists of arbitrary constants.
+
+## Exponential Matrix
+
+For a single equation of such form as $x'=Ax$, the solution is, obviously, $x=e^{At}$. Under the matrix case, where $A$ is a matrix and $x$ consists of multiple functions, thus forms a system, we expand the definition, using Taylor series.
+$$
+e^{At}=E+At+A^2\frac{t^2}{2!}+A^3\frac{t^3}{3!}+...
+$$
+Obviously, it satisfies the property of fundamental matrix, thus it is so. Therefore, a exponential matrix gives a form of solution of a homogeneous equation.
+$$
+\vec{x}=e^{At}\vec{C}=e^{At}\vec{x}(0)
+$$
+By the way, the inverse matrix of a exponential matrix is straight forward.
+$$
+(e^A)^{-1}=e^{-A}
+$$
+By such law, the computation of a fundamental matrix is also straight forward.
+$$
+e^{At}=\vec{x}(\vec{x}(0))^{-1}
+$$
+
+## Decoupling
+
+Apply some linear transform upon the original system:
+$$
+\begin{cases}
+u=ax+by\\
+v=cx+dy
+\end{cases}
+$$
+Or in a more general form:
+$$
+\vec{x}'=A\vec{x},\vec{x}=D\vec{u}
+$$
+Such that after the transformation, the system turns into a system which looks like:
+$$
+\begin{cases}
+u'=k_1u\\
+v'=k_2v
+\end{cases},\vec{u}'=\Lambda\vec{u}
+$$
+where the process should be:
+$$
+\vec{x}'=D\vec{u}'=AD\vec{u},AD=\Lambda D\Rightarrow\vec{u}'=\Lambda\vec{u}
+$$
+
+
+Such a system is called decoupled, where $\Lambda$ is eigenmatrix of the original coefficient matrix $A$. The solution is obvious.
+
+## Autonomous Non-linear System
+
+$$
+\begin{cases}
+x'=f(x,y)\\
+y'=g(x,y)
+\end{cases}
+$$
+
+### Closed Trajectory and Limited Cycles
+
+The trajectory goes around in finite time and repeat itself. Due to the existence of some arbitrary constants, the cycles may appear to be quite close to one another, thus form a family of curves. There are some kinds of cycles that are isolated and stable. Stability means the close by curves, both inside and outside, would tend to join the limited cycle as time goes to infinity, while an unstable closed curve has nearby curves go further as time goes on. Some physical sense of such a curve may be if some artificial change is set upon the system, once the factor of change is removed, the system goes back to the original periodic state. In many natural phenomenons, there contains a limited cycles. In general, there is no much method of finding it.
+
+#### Non-existence: Bendixson’s Theorem
+
+Calculate the divergence $div\vec{F}=f_x+g_y$. If it is not 0 in a certain region of $D$, there is no closed trajectory in $D$.
+
+To proof the theorem, we use a indirect proof. Suppose there is a closed trajectory in $D$, calculate flux integral along $C$, the edge of $D$, in positive direction, which is 0, since there is no flux.
+$$
+\oint_C\vec{F}\cdot\hat{n}dS=\iint div\vec{F}dA=0
+$$
+
+Since the divergence is never 0 in $D$, the theorem is then proved.
+
+#### Critical Criteria
+
+If there is no critical point inside region $D​$, there is no closed trajectory, where critical points are defined as all derivatives are 0.
+
+### Relation between First-order and Systems
+
+Eliminate $t$ by simple division:
+$$
+\frac{dy}{dx}=\frac{g(x,y)}{f(x,y)}
+$$
+The solution is simply a equation of $x$ and $y$. Sometimes, the original system is impossible to solve while the new first-order equation is simple.
