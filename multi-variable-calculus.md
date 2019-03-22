@@ -127,5 +127,181 @@ To prove the theorem, we simply prove the case of $N=0$, and automatically add t
 $$
 \oint_CMdx=\oint_{C_1}Mdx+\oint_{C_2}Mdx
 $$
-The equation holds, for the directions of integration along the overlapping boundaries of the sub-regions are opposite to one another.
+The equation holds, for the directions of integration along the overlapping boundaries of the sub-regions are opposite to one another. The process of proving $C_1$ and $C_2$ is essentially the same. The goal then becomes:
+$$
+\oint_{C_1}Mdx=\iint_{R_1}-M_ydA
+$$
+where $R_1$ is given by 2 function $f_1(x)$ and $f_2(x)$ with 2 vertical boundary $x=a,b$. There is:
+$$
+\int_{C_1}Mdx=\int_a^bM(x,f_1(x))dx+\int_b^aM(x,f_2(x))dx+0+0
+$$
+Thus, proved.
+
+An application of line integral according to Green’s Theorem is to compute the area of any shape of region with given boundary.
+$$
+Area=\iint_RdA=\oint_Cxdy=\frac{1}{2}\oint_Cxdy-ydx
+$$
+
+### Flux
+
+For a given plain curve $C$ and vector field $\vec{F}$:
+$$
+Flux=\int_C\vec{F}\cdot\hat{n}ds
+$$
+where $\hat{n}$ is the unit normal vector taking the direction of the right-hand-side of the direction moving along the curve and $ds$ is a tiny length of the curve, whereas the line integral for work takes dot product with tangent directions.
+
+Take the vector field to be the velocity field of some fluid. Flux measures how much fluid passes through $C$ per unit time. What flows across $C​$ from left to right is counted positively, while from right to left negatively.
+
+#### Coordinate Calculation
+
+Since $\hat{n}$ can be given by rotated $\hat{T}$, a similar coordinate expression may be given to $\hat{n}$.
+$$
+\hat{n}ds=(dy,-dx)
+$$
+For $\vec{F}=(P,Q)​$:
+$$
+\int_C\vec{F}\cdot\hat{n}ds=\int_C-Qdx+Pdy
+$$
+
+#### Green’s Theorem
+
+If $C$ is encloses a region $R$ counterclockwise and $\vec{F}=(P,Q)$, there is:
+$$
+\oint_C\vec{F}\cdot\hat{n}ds=\iint_Rdiv\vec{F}dA,div\vec{F}=P'_x+Q'_y
+$$
+If take transformation $N=P,M=-Q$, the form of the equation goes back to the Green Theorem for work.
+
+### Validity of Green’s Theorem
+
+2 different forms of Green’s Theorem:
+$$
+\oint_C\vec{F}\cdot\hat{T}ds=\iint_Rcurl\vec{F}dA,\oint_C\vec{F}\cdot\hat{n}ds=\iint_Rdiv\vec{F}dA
+$$
+Only works if $\vec{F}$ is defined everywhere in $R$. However, the region can carry a hole, ruling out the undefined points, while Green’s Theorem still holds.
+$$
+\oint_{C'}\vec{F}\cdot d\vec{r}-\oint_{C''}\vec{F}\cdot d\vec{r}=\iint_Rcurl\vec{F}dA
+$$
+where $C'$ is the outer bound, counterclockwise, and $C'$ is the inner bound, clockwise. If take:
+$$
+\vec{F}=\frac{-y\hat{i}+x\hat{j}}{x^2+y^2}
+$$
+the undefined point is at $(0,0)$. Then, $C''$ is a tiny circle surrounding the origin, if the original region $R$ contains the origin. In the places not containing the origin, the result of line integral is 0.
+
+#### Simply Connected Region
+
+The interior of any closed curve in $R$ is also in $R$, which gives the definition of simply connected region. Namely, the region contains no holes. If the domain where $\vec{F}$ is defined and differentiable is simply connected, it can always apply Green’s Theorem. A better theorem of the previous sentence may be: If $curl\vec{F}=0$ and domain where $\vec{F}$ is defined is simply connected, $\vec{F}$ is conservative and is a gradient.
+
+## Triple Integral
+
+## Triple Vector Field
+
+$$
+\vec{F}=(P(x,y,z),Q(x,y,z),R(x,y,z))
+$$
+
+### Flux
+
+Flux will be measured in a surface, therefore it is a surface integral.
+$$
+\pm Flux=\iint_S\vec{F}\cdot\hat{n}dS=\iint_S\vec{F}\cdot d\vec{S}\
+$$
+where the positive direction of the normal vector must be previously given. For polar coordinates:
+$$
+dS=\rho^2\sin\phi d\phi d\theta
+$$
+The major question continuously asked is:
+$$
+\hat{n}dS=?
+$$
+
+
+#### Simple Parallel Planes
+
+For planes like:
+$$
+H:z=a,\pm\hat{n}=(0,0,1),dS=dxdy
+$$
+The integral becomes a common double integral.
+
+#### Sphere of Radius $a$
+
+$$
+\hat{n}=\frac{1}{a}(x,y,z),dS=a^2\sin\phi d\phi d\theta
+$$
+
+#### Cylinder of Radius a on z-axis
+
+$$
+H:x^2+y^2=a^2,\hat{n}=\frac{1}{a}(x,y,0),dS=adzd\theta
+$$
+
+#### Any $z=f(x,y)$
+
+$$
+d\vec{S}=\hat{n}dS=\pm(-f_x',-f_y',1)dxdy
+$$
+
+The integrating region on xy plane is given by the shadow of the original plane. The transformation is given by:
+$$
+(dx,0,f_x'dx)\times(0,dy,f_y'dy)
+$$
+
+#### General Coordinate Form
+
+For a given transform:
+$$
+\begin{cases}
+x=x(u,v)\\
+y=y(u,v)\\
+z=z(u,v)
+\end{cases},\vec{r}=\vec{r}(u,v)
+$$
+There is:
+$$
+\hat{n}dS=(\frac{\partial\vec{r}}{\partial u}du)\times(\frac{\partial\vec{r}}{\partial v}dv)=(\frac{\partial\vec{r}}{\partial u}\times\frac{\partial\vec{r}}{\partial v})dudv
+$$
+If we know a normal vector $\vec{N}$, not necessarily unit, maybe given by the gradient of the given surface, the surface element is given by the angle between the surface and the axis plane:
+$$
+dA=\cos\alpha dS,\cos\alpha=\frac{\vec{N}\cdot\hat{k}}{|\vec{N}||\hat{k}|}
+$$
+where $dA$ is the surface element on the axis plane. Therefore, there is:
+$$
+\hat{n}dS=\frac{\vec{N}}{\vec{N}\cdot\hat{k}}dA=\frac{\vec{N}}{\vec{N}\cdot\hat{k}}dxdy
+$$
+The similar form works also for $dxdz$ and $dydz​$.
+
+#### Divergence Theorem
+
+To give a deeper explanation on divergence, we first look at the notation $\nabla$.
+$$
+\nabla f=(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z})
+$$
+Abstractly, we consider it as an operator.
+$$
+\nabla=(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z})
+$$
+Then, the divergence of a certain vector field $\vec{F}$ is:
+$$
+\nabla\cdot\vec{F}
+$$
+Laplace operator uses a similar notation.
+$$
+\nabla^2f=\nabla\cdot\nabla f=\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}
+$$
+where $f$ is a numeric function.
+
+The divergence theorem is stated as follows.
+
+If $S$ is a closed surface enclosing a region $D$ and $\hat{n}$ points outward and $\vec{F}$ is defined and differentiable everywhere in $D$, there is:
+$$
+\oiint_S\vec{F}\cdot d\vec{S}=\iiint_D div\vec{F}dV,div\vec{F}=P_x'+Q_y'+R_z'
+$$
+
+### Line Integral
+
+The definition is similar to the 2 dimensional case.
+$$
+\int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz
+$$
+
 
