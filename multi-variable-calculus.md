@@ -303,5 +303,23 @@ The definition is similar to the 2 dimensional case.
 $$
 \int_C\vec{F}\cdot d\vec{r}=\int_CPdx+Qdy+Rdz
 $$
+The method of solving, similarly, is to parameterize $C$, thus gets a simple single variable case. The properties of conservative field still apply here.
+
+To check whether the vector field is a gradient, we apply the old ideas of checking second derivatives.
+$$
+P_y'=Q_x',P_z'=R_x',Q_z'=R_y'
+$$
+The perspective of anti-derivative is still a good way of computing the numeric conservative field. 
+
+### Curl
+
+For given $\vec{F}=(P,Q,R)$:
+$$
+curl\vec{F}=(R_y'-Q_z',P_z'-R_x',Q_x'-P_y')
+$$
+If $\vec{F}$ is defined in a simply connected region, $\vec{F}$ is conservative is equivalent to $curl\vec{F}=0$. A better notation of curl is:
+$$
+curl\vec{F}=\nabla\times\vec{F}
+$$
 
 
