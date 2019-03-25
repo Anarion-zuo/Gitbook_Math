@@ -313,7 +313,7 @@ The perspective of anti-derivative is still a good way of computing the numeric 
 
 ### Curl
 
-For given $\vec{F}=(P,Q,R)$:
+For given $\vec{F}=(P,Q,R)​$:
 $$
 curl\vec{F}=(R_y'-Q_z',P_z'-R_x',Q_x'-P_y')
 $$
@@ -322,4 +322,62 @@ $$
 curl\vec{F}=\nabla\times\vec{F}
 $$
 
+### Stoke’s Theorem
 
+For given closed curve $C$, and any surface $S$ bounded by $C​$:
+$$
+\oint_C\vec{F}\cdot d\vec{r}=\iint_S(\nabla\times\vec{F})\cdot\hat{n}dS=\iint_Scurl\vec{F}\cdot\hat{n}dS
+$$
+where the direction of the normal vector is given by the direction of right hand curl of the direction of $C$. Another way of deciding the positive direction is to walk along the curve hold the left hand pointing towards the inner surface and the direction is the pointing of head. The theorem can also apply to the 2 dimensional case of line integral, which is Green’s Theorem.
+
+## Colusions
+
+A integral formula consists of 2 parts, one signifies integrating variable and the other signifies integrated variable. Here we categorize the forms of integral according to the forms of these variables.
+
+### Both Scalars
+
+$$
+\int f(x)dx,\iint f(x,y)dxdy,\iiint f(x,y,z)dxdydz
+$$
+
+These are the simplest forms of integral, which are the goal of other forms.
+
+A little more complex form is when the coordinates get bent.
+$$
+\int_Lfdl,\iint_SfdS,\iiint_VfdV
+$$
+By some simple transform, they can go back to the simplest form.
+$$
+dl=\sqrt{1+(y_x')^2}dx=\sqrt{(x'_t)^2+(y_t')^2}dt,dS=\sqrt{1+z_x'^2+z_y'^2}dxdy
+$$
+Under polar coordinates:
+$$
+\begin{cases}
+x=\rho\cos\theta\\
+y=\rho\sin\theta
+\end{cases},\frac{\partial(x,y)}{\partial(\rho,\theta)}=\rho
+$$
+
+$$
+\begin{cases}
+x=\rho\cos\phi\cos\theta\\
+y=\rho\cos\phi\sin\theta\\
+z=\rho\sin\phi
+\end{cases},\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)}=\rho^2\cos\phi
+$$
+
+### Both Vectors
+
+#### Line Vectors
+
+$$
+\int_L\vec{F}\cdot d\vec{r}=\int_LPdx+Qdy+Rdz=\iint_D curl\vec{F}dS
+$$
+
+#### Surface Vectors
+
+$$
+Flux=\iint_\Sigma Pdydz+Qdxdz+Rdxdy=\iint_\Sigma\vec{F}\cdot\hat{n}dS=\iiint_\Omega div\vec{F}dV
+$$
+
+where $L$ encloses $D$ and $\Sigma$ encloses $\Omega$. In both cases the form of integral is transform into the former case, which does not include any vector. 
