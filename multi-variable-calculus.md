@@ -380,4 +380,4 @@ $$
 Flux=\iint_\Sigma Pdydz+Qdxdz+Rdxdy=\iint_\Sigma\vec{F}\cdot\hat{n}dS=\iiint_\Omega div\vec{F}dV
 $$
 
-where $L$ encloses $D$ and $\Sigma$ encloses $\Omega$. In both cases the form of integral is transform into the former case, which does not include any vector. 
+where $L​$ encloses $D​$ and $\Sigma​$ encloses $\Omega​$. In both cases the form of integral is transform into the former case, which does not include any vector. 
