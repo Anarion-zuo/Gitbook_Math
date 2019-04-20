@@ -301,7 +301,7 @@ f(x)&x\in\bold{dom}f\\
 \infty&x\not\in\bold{dom}f
 \end{cases}
 $$
-The concave functions are quite the opposite. We assign negative infinity to concave functions.
+The concave functions are quite the opposite. We assign negative infinity to concave functions. For a convex function with domain undefined, we implicitly refer to its extended version, with positive infinity in undefined places. In this case, some functions seemingly increasing or decreasing would not be so and many other original properties may change.
 
 ### First-order Condition
 
@@ -365,7 +365,7 @@ $$
 
 The function “softly” tells the largest component of $x$, also called “soft max”, for a larger component effects the sum a lot more when taken exponential function, and $\ln$ squeezes the scale back. From another perspective, the function switches back and forth between the number of macro-states and entropy value.
 $$
-\nabla^2f(x)=\frac{1}{\bold{1}^Tz}\bold{diag}(z)-\frac{1}{(\bold{1}^Tz)^2}zz^T,z_k=\exp(x_k)
+\nabla^2f(x)=\frac{1}{\bold{1}^Tz}\bold{diag}(z)-\frac{1}{(\bold{1}^Tz)^2}zz^T,z_k=\exp(x_k),\bold{1}^Tx=\sum_{i=1}^nx_i
 $$
 To show $\nabla^2f(x)\succeq0​$, we must verify that $v^T\nabla^2f(x)v\ge0,\forall v​$,
 $$
@@ -420,3 +420,219 @@ Here the relation between convex set and probability is revealed.
 - sum: $f_1+f_2$ is convex if $f_1,f_2$ is convex, extending to sum with more terms and integrals.
 - composition with affine function: $f(Ax+b)$ is convex if $f$ is convex.
 
+#### Point-wise Maximum and Supremum
+
+If $f_1,...,f_m$ are convex, $f(x)=\max\{f_x(x),...,f_m(x)\}$ is convex.
+
+Extend the idea to supremum. If $f(x,y)$ is convex in $x$ for each $y\in A$,
+$$
+g(x)=\sup_{y\in A}f(x,y)
+$$
+It is convex.
+
+#### Composition with Scalar Functions
+
+Composition of $g:\R^n\rightarrow\R$ and $h:\R\rightarrow\R$:
+$$
+f(x)=h(g(x))
+$$
+$f$ is convex if
+
+- $g$ convex, $h$ convex, $\tilde h$ non-decreasing
+- $g$ concave, $h$ convex, $\tilde h$ non-increasing
+
+Because,
+$$
+f''(x)=h''(g(x))g'(x)^2+h'(g(x))g''(x)
+$$
+The principle is the result of chain rule, regardless of all other rules and conclusions.
+
+For example,
+
+- $\exp(g(x))$ is convex if $g$ is convex.
+- $1/g(x)$ is convex if $g$ is concave and positive.
+
+Expand the idea to multi-dimensional cases. $g:\R^n\rightarrow\R^k,h:\R^k\rightarrow\R​$:
+$$
+f(x)=h(g(x))=h(g_1(x),g_2(x),...,g_k(x))
+$$
+
+$$
+f''(x)=g'(x)^T\nabla^2h(g(x))g'(x)+\nabla h(g(x))^Tg''(x)
+$$
+
+#### Minimization and Maximization
+
+If $f(x,y)$ is convex in $(x,y)$ and $C$ is a convex set,
+$$
+g(x)=\begin{cases}\inf_{y\in C}f(x,y)\\
+\sup_{y\in C}f(x,y)\end{cases}
+$$
+It is convex when $\forall y\in C,f(x,...)$ is convex, which is trivial. For example,
+$$
+f(x,y)=x^TAx+2x^TBy+y^TCy,\begin{pmatrix}A&B\\B^T&C\end{pmatrix}\succeq0,C\succeq0
+$$
+minimizing over $y$ gives $g(x)=\inf_yf(x,y)=x^T(A-BC^{-1}B^T)x$. $g$ is convex, hence Schur complement $A-BC^{-1}B^T\succeq0$.
+
+#### Perspective
+
+The perspective of a function $f:\R^n\rightarrow\R$ is the function $g:\R^{n+1}\rightarrow\R$,
+$$
+g(x,t)=tf(\frac{x}{t}),\bold{dom}g=\{(x,t)|\frac{x}{t}\in\bold{dom}f,t>0\}
+$$
+$g$ is convex if $f$ is convex.
+
+#### Conjugate Function
+
+$$
+f^*(y)=\sup_{x\in\bold{dom}f}(y^Tx-f(x))
+$$
+
+For example:
+
+- negative logarithm $f(x)=-\ln x$
+
+$$
+f^*(y)=\sup_{x>0}(xy+\ln x)=\begin{cases}-1-\ln(-y)&y<0\\\infty&otherwise\end{cases}
+$$
+
+### Quasiconvex Functions
+
+$f:\R^n\rightarrow\R​$ is quasiconvex if $\bold{dom}f​$ is convex and the sublevel sets $S_\alpha=\{x\in\bold{dom}f|f(x)\le\alpha\}​$ are convex for all $\alpha​$.
+
+- $f​$ is quasiconcave if $-f​$ is quasiconvex.
+- $f​$ is quasilinear if it is quasiconvex and quasiconcave.
+
+#### Examples
+
+- $\sqrt{|x|}$ is quasiconvex on $\R$.
+- $ceil(x)=\inf\{z\in\Z|z\ge x\}$ is quasilinear.
+- $\ln x$ is quasilinear on $\R_{++}$.
+- $f(x_1,x_2)$ is quasiconcave on $\R_{++}^2$.
+- linear fractional function is quasilinear
+
+$$
+f(x)=\frac{a^Tx+b}{c^Tx+d},\bold{dom}f=\{x|c^Tx+d>0\}
+$$
+
+- distance ration is quasiconvex
+
+$$
+f(x)=\frac{||x-a||_2}{||x-b||_2},\bold{dom}f=\{x|\text{ }||x-a||_2\le||x-b||_2\}
+$$
+
+#### Properties
+
+modified Jensen inequality:
+$$
+0\le\theta\le1\Rightarrow f(\theta x+(1-\theta)y)\le\max\{f(x),f(y)\}
+$$
+first-order condition: differentiable $f$ with convex domain is quasiconvex if
+$$
+f(y)\le f(x)\Rightarrow\nabla f(x)^T(y-x)\le0
+$$
+
+### Log-concave and Log-convex Functions
+
+A positive function $f$ is log-concave if $\ln f$ is concave:
+$$
+f(\theta x+(1-\theta)y)\ge f(x)^\theta f(y)^{(1-\theta)}\forall0\le\theta\le1
+$$
+$f$ is log-convex if $\ln f$ is convex.
+
+## Terminology of Optimization Problem
+
+### Standard Form Definition
+
+$$
+f_0(x)\rightarrow \min\\
+s.t.\quad\begin{align*}&f_i(x)\le,i=1,...,m\\&h_i(x)=0,i=1,...,p\end{align*}
+$$
+
+- $x\in\R^n$ is the optimization variable
+- $f_0:\R^n\rightarrow\R$ is the objective or cost function
+- $f_i:\R^n\rightarrow\R,i=1,...,m$ are inequality constraint functions
+- $h_i:\R^n\rightarrow\R$ are the equality constraint functions
+
+optimal value:
+$$
+p^*=\inf\{f_0(x)|f_i(x)\le0,i=1,...,m,h(x_i)=0,i=1,...,p\}
+$$
+
+- $p^*=\infty$, if problem is infeasible (no $x$ satisfy the constraints).
+- $p^*=-\infty$, if problem is unbounded below.
+
+### Optimal and Locally Optimal Points
+
+- $x$ is feasible if $x\in\bold{dom}f_0$ and it satisfies the constraints.
+- A feasible $x$ is optimal if $f_0(x)=p^*$; $X_{opt}$ is the set of optimal points.
+- $x$ is locally optimal if there is an $R>0$ such that $x$ is optimal for
+
+$$
+f_0(z)\rightarrow \min\\
+s.t.\quad\begin{cases}&f_i(z)\le,i=1,...,m\\&h_i(z)=0,i=1,...,p\\&||z-x||_2\le R\end{cases}
+$$
+
+Examples:
+
+- $f_0(x)=1/x,\bold{dom}f_0=\R_{++}:p^*=0$, no optimal point.
+- $f_0(x)=-\ln x,\bold{dom}f_0=\R_{++}:p^*=0$.
+- $f_0(x)=x\ln x,\bold{dom}f_0=\R_{++}:p^*=-1/e,x=1/e$ is optimal.
+- $f_0(x)=x^3-3x,p^*=-\infty$, local optimal at $x=1$.
+
+### Implicit Constraints
+
+The standard form optimization problem has an implicit constraint:
+$$
+x\in D=\bigcap_{i=0}^m\bold{dom}f_i\cap\bigcap_{i=1}^p\bold{dom}h_i
+$$
+
+- We call $D$ the domain of the problem.
+- The constraints $f_i(x)\le0,h_i(x)=0$ are the explicit constraints.
+- A problem is unconstrained if it has no explicit constraints, $m=p=0$.
+
+### Feasibility Problem
+
+$$
+\text{find}\quad x\\
+s.t.\quad\begin{cases}&f_i(z)\le,i=1,...,m\\&h_i(z)=0,i=1,...,p\end{cases}
+$$
+
+can be considered a special case of the general problem of optimization with $f_0(x)=C$.
+
+- $p^*=0$, if constraints are feasible; any feasible $x$ is optimal.
+- $p^*=\infty$, if constraints are infeasible.
+
+## Terminology of  Convex Optimization Problem
+
+### Definition
+
+$$
+h_i(x)=a_i^Tx-b_i,i=1,...,p
+$$
+
+- $f_0,...,f_m$ are convex; equality constraints are affine.
+- Problem is quasiconvex if $f_0$ is quasiconvex (and $f_1,...,f_m$ are convex).
+
+Often written as
+$$
+f_0(z)\rightarrow \min\\
+s.t.\quad\begin{cases}&f_i(z)\le,i=1,...,m\\&Ax=b\end{cases}
+$$
+Important property: feasible set of a convex optimization problem is convex.
+
+Therefore, a natural statement of the definition of convex optimization problem is that it is to minimize a convex function over a convex set.
+
+### Local and Global Optima
+
+Theorem: Any locally optimal point of a convex problem is (globally) optimal.
+
+#### Proof 
+
+Suppose $x$ is locally optimal and $y$ is optimal with $f_0(y)<f_0(x)$. $x$ is locally optimal means there is an $R>0$ such that
+$$
+z\text{ frasible, }||z-x||_2\le R\Rightarrow f_0(z)\ge f_0(x)
+$$
+consider $z=\theta y+(1-\theta)x$ with $\theta=R/(2||y-x||_2)$
+
+- $||y-x||_2>R$, so $0<\theta<1/2$.
