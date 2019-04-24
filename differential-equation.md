@@ -60,7 +60,7 @@ y_1y_2'\ne y_2y_1'
 $$
 In another word, the determination or Wronskian is not 0.
 
-If $y_1$ and $y_2$ is dependent, the $c_1$ and $c_2$ cannot be solved and Wronskian is always 0. If not the case, there always would be a pair of $c_1$ and $c_2​$ that represents a solution.
+If $y_1$ and $y_2$ is dependent, the $c_1$ and $c_2$ cannot be solved and Wronskian is always 0. If not the case, there always would be a pair of $c_1$ and $c_2$ that represents a solution.
 
 The definition of normalized solution is a solution which satisfies a very unique initial state.
 $$
@@ -86,7 +86,7 @@ $$
 y''+p(x)y'+q(x)y=f(x),Ly=f(x)
 $$
 
-where $f(x)​$ is named as put, driving term, forcing term, signal… The solution is called response, output… The solution consists of 2 parts, homogeneous part and the particular part. 
+where $f(x)$ is named as put, driving term, forcing term, signal… The solution is called response, output… The solution consists of 2 parts, homogeneous part and the particular part. 
 $$
 y_c/y_h=c_1y_1+c_2y_2\quad\text{//homogeneous solution}
 $$
@@ -265,7 +265,7 @@ For a second order equation:
 
 #### Orthogonality
 
-For 2 functions $u(t)​$ and $v(t)​$ with period $2T​$, if:
+For 2 functions $u(t)$ and $v(t)$ with period $2T$, if:
 $$
 \int_{-T}^Tu(t)v(t)dt=0
 $$
@@ -273,7 +273,7 @@ The 2 function are orthogonal. For a set of trig-functions:
 $$
 \left\{\sin n_1t,...,\cos n_2t,...\right\},n_1,n_2\in \N
 $$
-Any 2 distinct ones are orthogonal on $[-\pi,\pi]​$.
+Any 2 distinct ones are orthogonal on $[-\pi,\pi]$.
 
 ##### Some Proof of Orthogonality
 
@@ -303,7 +303,7 @@ The equation is:
 $$
 n^2\int_{-\pi}^\pi u_nv_mdt=\int_{-\pi}^\pi u_n'v_m'dt
 $$
-LHS is not symmetric with $u$ and $v​$ while RHS is. Therefore both sides are 0.
+LHS is not symmetric with $u$ and $v$ while RHS is. Therefore both sides are 0.
 
 #### Compute each Term
 
@@ -367,7 +367,7 @@ Visually, we find the Fourier series analyze functions on a whole perspective, w
 
 The Theorem goes:
 
-- If $f(t)​$ is continuous at $t_0​$, the function strictly equals its Fourier series, while otherwise, not quite.
+- If $f(t)$ is continuous at $t_0$, the function strictly equals its Fourier series, while otherwise, not quite.
 
 Therefore, the previous example is not so correct. At the jumping point of the function, the series converges at the midpoint of the upper and lower jumping position. 
 
@@ -578,7 +578,7 @@ $$
 
 ## Convolution
 
-The introduction to convolution is to find a certain transform from $f,g​$ to the product of their Laplace transform result. It is hereby defined.
+The introduction to convolution is to find a certain transform from $f,g$ to the product of their Laplace transform result. It is hereby defined.
 $$
 F(s)G(s)=\int_0^\infty e^{-st}(f*g)dt
 $$
@@ -601,7 +601,7 @@ Convert the problem into double integral:
 $$
 F(s)G(s)=\int_0^\infty e^{-su}f(u)du\times\int_0^\infty e^{-sv}g(v)dv=\int_0^\infty\int_0^\infty e^{-s(u+v)}f(u)g(v)dudv
 $$
-Suppose $t=u+v$, eliminate $v​$ in the formula:
+Suppose $t=u+v$, eliminate $v$ in the formula:
 $$
 \int_0^\infty\int_0^\infty e^{-s(u+v)}f(u)g(v)dudv=\int_0^\infty\int_0^t e^{-st}f(u)g(t-u)dudt
 $$
@@ -709,7 +709,7 @@ Eliminating variables generate an equation of the sum of the order of the others
 $$
 T_1=c_1e^{-t}+c_2e^{-6t}
 $$
-Then, $T_2​$ can be easily calculated.
+Then, $T_2$ can be easily calculated.
 
 ## Autonomous System
 
@@ -746,7 +746,7 @@ Suppose:
 $$
 \begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}a_1\\a_2\end{pmatrix}e^{\lambda t}
 $$
-Substitute this into the equation and solve the algebraic equation like we do in single second order equations. The solution, none 0, of the algebraic linear equation is unique. Therefore the determination of the equation is 0. We hereby solve $\lambda​$. The relation between $a_1,a_2​$ can be obtained by the equation, but not the exact value, which has to be given by the initial state, and if not, the computation process is wrong.
+Substitute this into the equation and solve the algebraic equation like we do in single second order equations. The solution, none 0, of the algebraic linear equation is unique. Therefore the determination of the equation is 0. We hereby solve $\lambda$. The relation between $a_1,a_2$ can be obtained by the equation, but not the exact value, which has to be given by the initial state, and if not, the computation process is wrong.
 
 ### General Solution
 
@@ -859,14 +859,14 @@ $$
 
 #### Properties
 
-1. $\det X\ne 0$, for any $t​$.
-2. $X'=AX​$
+1. $\det X\ne 0$, for any $t$.
+2. $X'=AX$
 
 ### Example: Mixing Problem
 
 ![1551713519888](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1551713519888.png)
 
-There are these 2 tanks connected at the top and bottom with given fluid rate in numbers. The fluid rate must remain balanced, which means the sum of the input rates and output rates equals, as is shown in the picture. There are some kinds of substances in the fluid. The x tank has input salt solution, while y tank has input pure water. Suppose $x,y​$ correspond to the concentration of the tanks, respectively. The system is described as:
+There are these 2 tanks connected at the top and bottom with given fluid rate in numbers. The fluid rate must remain balanced, which means the sum of the input rates and output rates equals, as is shown in the picture. There are some kinds of substances in the fluid. The x tank has input salt solution, while y tank has input pure water. Suppose $x,y$ correspond to the concentration of the tanks, respectively. The system is described as:
 $$
 \vec{x}'=\begin{pmatrix}-3&2\\3&-4\end{pmatrix}\vec{x}+\begin{pmatrix}5e^{-t}\\0\end{pmatrix}
 $$
@@ -969,7 +969,7 @@ Since the divergence is never 0 in $D$, the theorem is then proved.
 
 #### Critical Criteria
 
-If there is no critical point inside region $D​$, there is no closed trajectory, where critical points are defined as all derivatives are 0.
+If there is no critical point inside region $D$, there is no closed trajectory, where critical points are defined as all derivatives are 0.
 
 ### Relation between First-order and Systems
 
