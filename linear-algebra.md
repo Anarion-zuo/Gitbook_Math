@@ -397,7 +397,7 @@ When $Q$ is a square matrix, it is also called a orthogonal matrix, for $Q^T=Q^{
 
 #### Projection Matrix
 
-The projection of some vector upon $Q$:
+The projection of some vector upon orthonormal $Q$:
 $$
 P=Q(Q^TQ)^{-1}Q^T=QQ^T
 $$
@@ -660,9 +660,17 @@ $$
 
 where $S$ can be transformed into orthonormal matrices.
 $$
-A=Q\Lambda Q^{-1}=Q\Lambda Q^T
+A=Q\Lambda Q^{-1}=Q\Lambda Q^T=\sum_{i=1}^n\lambda_iq_iq_i^T
 $$
+
+#### Spectrum Theorem
+
 The process is called spectrum theorem, which perfectly shows the beautiful properties of eigenvalues, eigenvectors, symmetry, and inversion.
+
+From another point of view, a symmetric matrix can be represented as a linear combination of perpendicular projection matrices.
+$$
+A=\sum_{i=1}^n\lambda_iq_iq_i^T
+$$
 
 #### Proof for Real Eigenvalues
 
@@ -690,3 +698,88 @@ Compare and done:
 $$
 \lambda=\bar\lambda
 $$
+If we have complex matrices, change the term of symmetry into $A=\bar A^T$.
+
+## Complex Matrices
+
+For a complex vector $z=(z_1,z_2...,z_n)^T\in\C^n$. The length is not $z^Tz$, for the length should be a positive real number or 0. The right answer should be $||z||_2^2=\bar z^Tz$.
+
+Define Hermitian operation:
+$$
+z^H=\bar z^T
+$$
+And the dot product should be different too:
+$$
+a\cdot b=a^Hb
+$$
+Symmetry, also known as Hermitian matrices:
+$$
+A^H=A
+$$
+Orthonormal matrices changed into unitary matrices:
+$$
+q_i^Hq_j=\begin{cases}0&i\ne j\\1&i=j\end{cases},Q^HQ=I
+$$
+
+### Fourier Matrix
+
+#### Definition
+
+$$
+F_n=\begin{pmatrix}
+1&1&1&\cdots&1\\
+1&w&w^2&\cdots&w^{n-1}\\
+1&w^2&w^4&\cdots&w^{2(n-1)}\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+1&w^{n-1}&w^{2(n-1)}&\cdots&w^{(n-1)^2}
+\end{pmatrix},
+(F_n)_{ij}=w^{ij},i,j\in[0,n)
+$$
+
+where for $w$:
+$$
+w=\exp(\frac{2\pi}{n}i)=\cos\frac{2\pi}{n}+i\sin\frac{2\pi}{n}
+$$
+$w$ is the uniform separation of unit circle on the complex plane.
+
+It can be checked that the Fourier matrix is orthonormal.
+$$
+F^H_nF_n=I_n
+$$
+
+#### Recursive Property
+
+$$
+F_{2n}=\begin{pmatrix}I&D\\I&-D\end{pmatrix}\begin{pmatrix}F_n&O\\O&F_n\end{pmatrix}P
+$$
+
+$P$ is a permutation matrix, switching the columns. It rearranges the order of the columns from $1,2,...,n$ to $1,n/2+1,2,n/2+2,...,n$.
+$$
+D=\begin{pmatrix}1\\&w\\&&w^2\\&&&\ddots\\&&&&w^{n-1}\end{pmatrix}
+$$
+Time complexity:
+$$
+T(n)=\frac{1}{2}n\log_2n
+$$
+
+## Positive Definite (Symmetric) Matrix
+
+The signs of the pivots are same as the signs of the eigenvalues. The number of pivots equals the number of eigenvalues.
+
+### Definition
+
+- The matrix HAS TO BE symmetric.
+- The matrices with all eigenvalues positive
+- All pivots are positive.
+- All sub-determinants are positive.
+
+If $A_1,...,A_n$ is the submatrix of $A$, $\det A_i>0$ means the matrix is positive definite. If $\det A_i\ge0$, the matrix is positive semi definite.
+
+
+
+### How to Tell
+
+- Definitions
+
+#### Determinant
+
