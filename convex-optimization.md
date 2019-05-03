@@ -62,7 +62,7 @@ x=\theta x_1+(1-\theta)x_2
 $$
 ![1554104122130](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1554104122130.png)
 
-If there is a constraint of $1\le\theta\le1​$, the set is a convex set. In other words, a convex set contains line segment between any 2 points in the set.
+If there is a constraint of $1\le\theta\le1$, the set is a convex set. In other words, a convex set contains line segment between any 2 points in the set.
 $$
 x_1,x_2\in C,\theta\in[0,1]\Rightarrow\theta x_1+(1-\theta)x_2\in C
 $$
@@ -83,7 +83,7 @@ A nonnegative conic combination of $x_1$ and $x_2$ is: at any point of the form
 $$
 x=\theta_1x_1+\theta_2x_2
 $$
-with $\theta_1\ge0,\theta_2\ge0​$.
+with $\theta_1\ge0,\theta_2\ge0$.
 
 ![1554104989538](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1554104989538.png)
 
@@ -140,15 +140,15 @@ Component-wise inequality means the inequality satisfies for each component of t
 
 ### Positive Semi-definite Cone
 
-Positive semi-definite cone $S^n​$ is a set of symmetric $n\times n​$ matrices. $S^n_+=\{X\in S^n|X\succeq0\}​$. It is a convex cone.
+Positive semi-definite cone $S^n$ is a set of symmetric $n\times n$ matrices. $S^n_+=\{X\in S^n|X\succeq0\}$. It is a convex cone.
 $$
 X\in S^n_+\Leftrightarrow z^TXz\ge0,\forall z
 $$
-A positive definite is $S^n_{++}=\{X\in S^n|X\succ0\}​$.
+A positive definite is $S^n_{++}=\{X\in S^n|X\succ0\}$.
 
 ### Operations preserving Convexity
 
-For a convex set $C​$,
+For a convex set $C$,
 
 1. Apply definition
 
@@ -167,8 +167,8 @@ $$
 
 A convex cone $K\subseteq \R^n$ is a proper cone if,
 
-- $K​$ is closed (contains its boundary). $||x||_2\le1​$ is closed and $||x||_1<1​$ is not.
-- $K​$ is solid (has nonempty interior).
+- $K$ is closed (contains its boundary). $||x||_2\le1$ is closed and $||x||_1<1$ is not.
+- $K$ is solid (has nonempty interior).
 - $K$ is pointed (contains no line). A line must extend itself to the infinity or it is not a line.
 
 A generalized inequality is defined by a proper cone $K$.
@@ -176,7 +176,7 @@ $$
 x\preceq_Ky\Leftrightarrow y-x\in K,x\prec_Ky\Leftrightarrow y-x\in \bold{int} K
 $$
 
-$\bold{int}$ is the interior of $K​$.
+$\bold{int}$ is the interior of $K$.
 
 For example,
 
@@ -188,11 +188,11 @@ $$
 
 The properties of $\preceq$ are similar to those of $\le$ upon $R$. Or we should say that $\le$ is a special case for $\preceq$ on $\R^1$.
 
-Similarly, we can define minimum and maximum for our new notation. $x\in S​$ is the minimum element of $S​$ with respect to $\preceq_K​$ if
+Similarly, we can define minimum and maximum for our new notation. $x\in S$ is the minimum element of $S$ with respect to $\preceq_K$ if
 $$
 y\in S\Rightarrow x\preceq_K y
 $$
-$x\in S$ is a minimal element of $S$ with respect to $\preceq_K​$ if
+$x\in S$ is a minimal element of $S$ with respect to $\preceq_K$ if
 $$
 y\in S,y\preceq_K x\Rightarrow y=x
 $$
@@ -225,8 +225,8 @@ A visual explanation of duality is that the 2 boundary of the new cone is respec
 There are self-dual cones:
 
 - $K=\R_+^n$
-- $K=S^n_+​$, semi-definite positive cone.
-- $K=\{(x,t)|\text{ }||x||_2\le t\}​$, circle.
+- $K=S^n_+$, semi-definite positive cone.
+- $K=\{(x,t)|\text{ }||x||_2\le t\}$, circle.
 
 Or not:
 
@@ -280,7 +280,7 @@ $$
 
 ### Restriction of a Convex Function to a Line
 
-For function $g:\R \rightarrow\R​$,
+For function $g:\R \rightarrow\R$,
 $$
 g(t)=f(x+tv),\bold{dom}g=\{t|x+tv\in\bold{dom}f\}
 $$
@@ -319,7 +319,7 @@ which simply means the first order of Taylor expansion, the tangent line, is who
 
 ### Second-order Condition
 
-$f​$ is twice differentiable if $\bold{dom}f​$ is open and the Hessian $\nabla^2f(x)\in S^n​$,
+$f$ is twice differentiable if $\bold{dom}f$ is open and the Hessian $\nabla^2f(x)\in S^n$,
 $$
 \nabla^2f(x)_{ij}=\frac{\partial^2f(x)}{\partial x_i\partial x_j},i,j=1,...,n
 $$
@@ -329,7 +329,7 @@ Twice differentiable $f$ with convex domain is convex if and only if
 $$
 \nabla^2f(x)\succeq0,\forall x\in\bold{dom}f
 $$
-Change the $\succeq$ into $>​$ and the conclusion becomes strictly convex.
+Change the $\succeq$ into $>$ and the conclusion becomes strictly convex.
 
 For examples, 
 
@@ -367,7 +367,7 @@ The function “softly” tells the largest component of $x$, also called “sof
 $$
 \nabla^2f(x)=\frac{1}{\bold{1}^Tz}\bold{diag}(z)-\frac{1}{(\bold{1}^Tz)^2}zz^T,z_k=\exp(x_k),\bold{1}^Tx=\sum_{i=1}^nx_i
 $$
-To show $\nabla^2f(x)\succeq0​$, we must verify that $v^T\nabla^2f(x)v\ge0,\forall v​$,
+To show $\nabla^2f(x)\succeq0$, we must verify that $v^T\nabla^2f(x)v\ge0,\forall v$,
 $$
 v^T\nabla^2f(x)v\ge0=\frac{(\sum_kz_kv_k^2)(\sum_kz_k)-(\sum_kv_kz_k)^2}{(\sum_kz_k)^2}\ge0
 $$
@@ -452,7 +452,7 @@ For example,
 - $\exp(g(x))$ is convex if $g$ is convex.
 - $1/g(x)$ is convex if $g$ is concave and positive.
 
-Expand the idea to multi-dimensional cases. $g:\R^n\rightarrow\R^k,h:\R^k\rightarrow\R​$:
+Expand the idea to multi-dimensional cases. $g:\R^n\rightarrow\R^k,h:\R^k\rightarrow\R$:
 $$
 f(x)=h(g(x))=h(g_1(x),g_2(x),...,g_k(x))
 $$
@@ -498,10 +498,10 @@ $$
 
 ### Quasiconvex Functions
 
-$f:\R^n\rightarrow\R​$ is quasiconvex if $\bold{dom}f​$ is convex and the sublevel sets $S_\alpha=\{x\in\bold{dom}f|f(x)\le\alpha\}​$ are convex for all $\alpha​$.
+$f:\R^n\rightarrow\R$ is quasiconvex if $\bold{dom}f$ is convex and the sublevel sets $S_\alpha=\{x\in\bold{dom}f|f(x)\le\alpha\}$ are convex for all $\alpha$.
 
-- $f​$ is quasiconcave if $-f​$ is quasiconvex.
-- $f​$ is quasilinear if it is quasiconvex and quasiconcave.
+- $f$ is quasiconcave if $-f$ is quasiconvex.
+- $f$ is quasilinear if it is quasiconvex and quasiconcave.
 
 #### Examples
 
@@ -591,6 +591,8 @@ $$
 - The constraints $f_i(x)\le0,h_i(x)=0$ are the explicit constraints.
 - A problem is unconstrained if it has no explicit constraints, $m=p=0$.
 
+For example, $\log(b_i-a_ix)$ implies that $b_i>a_ix$ and it is the solution to the feasibility problem.
+
 ### Feasibility Problem
 
 $$
@@ -617,22 +619,284 @@ $$
 Often written as
 $$
 f_0(z)\rightarrow \min\\
-s.t.\quad\begin{cases}&f_i(z)\le,i=1,...,m\\&Ax=b\end{cases}
+s.t.\quad\begin{cases}&f_i(z)\le0,i=1,...,m\\&Ax=b\end{cases}
 $$
 Important property: feasible set of a convex optimization problem is convex.
 
 Therefore, a natural statement of the definition of convex optimization problem is that it is to minimize a convex function over a convex set.
 
+For example:
+$$
+\min f_0=x_1^2+x_2^2\\
+s.t.\begin{cases}
+f_1(x)=\frac{x_1}{1+x_2^2}\le0\\
+h_1(x)=(x_1+x_2)^2=0
+\end{cases}
+$$
+The problem is not a convex optimization problem, for it has a different form. However, the form may be changed equivalently into another simpler way so that it is a convex optimization problem.
+$$
+\min f_0=x_1^2+x_2^2\\
+s.t.\begin{cases}
+x_1<0\\
+x_1+x_2=0
+\end{cases}
+$$
+which makes the first problem seems silly.
+
 ### Local and Global Optima
 
 Theorem: Any locally optimal point of a convex problem is (globally) optimal.
 
-#### Proof 
+#### Proof by Contradiction
 
 Suppose $x$ is locally optimal and $y$ is optimal with $f_0(y)<f_0(x)$. $x$ is locally optimal means there is an $R>0$ such that
 $$
-z\text{ frasible, }||z-x||_2\le R\Rightarrow f_0(z)\ge f_0(x)
+z\text{ feasible, }||z-x||_2\le R\Rightarrow f_0(z)\ge f_0(x)
 $$
 consider $z=\theta y+(1-\theta)x$ with $\theta=R/(2||y-x||_2)$
 
 - $||y-x||_2>R$, so $0<\theta<1/2$.
+- $z$ is a convex combination of 2 feasible points, hence also feasible.
+- $||z-x||_2=R/2$ and 
+
+$$
+f_0(z)\le\theta f_0(x)+(1-\theta)f_0(y)<f_0(x)
+$$
+
+which contradicts our assumption that $x$ is locally optimal.
+
+### Optimal Criterion for Differentiable $f_0$
+
+$x$ is optimal if and only if it is feasible and 
+$$
+\nabla f_0(x)^T(y-x)\ge0,\forall y\text{ feasible}
+$$
+It simply says the tangent plane at the optimal point is always below the rest of the graph, which is quite obvious.
+
+- unconstrained problem: $x$ is optimal if and only if $x\in\bold{dom}f_0,\nabla f_0(x)=0$.
+- equality constrained problem: $\min f_0(x)\qquad s.t.\quad Ax=b$, $x$ is optimal if and only if there exists a $\nu$ such that $x\in\bold{dom}f_0,Ax=b,\nabla f_0(x)+A^T\nu=0$.
+
+This statement says the same thing as the criterion says.
+$$
+\nabla f_0(x)^T(z-x)\ge0,\forall z
+$$
+Therefore, $z-x$ is in the null space of $A$ and $\nabla f_0(x)\in N(A)^\perp$. Hence:
+$$
+\nabla f_0(x)\in R(A^T)\Rightarrow\nabla f_0(x)=A^Tu
+$$
+
+- minimization over nonnegative orthant
+
+$$
+\min f_0(x)\quad s.t.\quad x\succeq0
+$$
+
+$x$ is optimal if and only if:
+$$
+x\in\bold{dom}f_0,x\succeq0,\begin{cases}
+\nabla f_0(x_i)\ge0&x_i\ge0\\
+\nabla f_0(x_i)=0&x_i>0
+\end{cases}
+$$
+The conclusion above is a simplification version of:
+$$
+\nabla f(x)^T(z-x)\ge0,\forall z\ge0
+$$
+If the gradient has a negative entry, and the corresponding entry of $z-x$ is very big due to a special choice for $z$, the inequality will not hold. Therefore, we must have each entry of the gradient is greater or equal to 0, $\nabla f(x)\succeq0$.
+
+### Equivalent Convex Problems
+
+Two problems are (informally) equivalent if the solution of one is readily obtained from the solution of the other, and vice-versa. Some common transformations that preserve convexity must be discussed here.
+
+#### Eliminating Equality Constraints
+
+$$
+\min_x f_0(x)\\
+s.t.\begin{cases}
+f_i(x)\le0,i=1,...,m\\
+Ax=b
+\end{cases}
+$$
+
+is equivalent to
+$$
+\min_z f_0(Fz+x_0)\\
+s.t.\quad f_i(Fz+x_0)\le0,i=1,...,m
+$$
+where $F,x_0$ are such that:
+$$
+Ax=b\Leftrightarrow x=Fz+x_0,\exists z,A(Fz)=0,Ax_0=b
+$$
+
+#### Introducing Equality Constraints
+
+$$
+\min_x f_0(A_0x+b_0)\\
+s.t.\quad f_i(A_ix+b_i)\le0,i=1,..,m
+$$
+
+is equivalent to:
+$$
+\min_{x,y_i}f_0(y_0)\\
+s.t.\begin{cases}
+f_i(y_i)\le0&i=1,...,m\\
+y_i=A_ix+b_i&i=0,...,m
+\end{cases}
+$$
+
+#### Introducing Slack Variables for Linear Inequalities
+
+$$
+\min_x f_0(x)\\
+s.t.\quad a_i^Tx\le b_i,i=1,...,m
+$$
+
+is equivalent to
+$$
+\min_{x,s}f_0(x)\\
+s.t.\begin{cases}
+a_i^Tx+s_i=b_i&i=1,...,m\\
+s_i\ge0&i=1,...,m
+\end{cases}
+$$
+
+#### Epigraph Form
+
+Standard form convex problem $f_0(x)\le t$ is equivalent to:
+$$
+\min_{x,t}t\\
+s.t.\begin{cases}
+f_0(x)-t\le0\\
+f_i(x)\le0&i=1,...,m\\
+Ax=b
+\end{cases}
+$$
+
+#### Minimizing over Some Independent Variables
+
+$$
+\min_{x_1,x_2}f_0(x_1,x_2)\\
+s.t.\quad f_i(x_1)\le0,i=1,...,m
+$$
+
+is equivalent to
+$$
+\min_{x_1}\tilde{f}_0(x_1)\\
+s.t.\quad f_i(x_1)\le0,i=1,...,m
+$$
+where $f_0(x_1)=\inf_{x_2}f_0(x_1,x_2)$. This follows the idea of dynamic programming.
+
+### Quasiconvex Optimization
+
+$$
+\min_x f_0(x)\\s.t.\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+Ax=b
+\end{cases}
+$$
+
+with $f_0:\R^n\rightarrow\R$ quasiconvex, $f_1,...,f_m$ convex.
+
+In quasiconvex problems, we could have locally optimal points that are not (globally) optimal, such as saddle points.
+
+#### Convex Representation of Sublevel Sets of $f_0$
+
+If $f_0$ is quasiconvex, there exists a family of functions $\phi_t$ such that:
+
+- $\phi_t(x)$ is convex in $x$ for fixed $t$.
+- $t$-sublevel set of $f_0$ is $0$-sublevel set of $\phi_t$. $i.e.$
+
+$$
+f_0(x)\le t\Leftrightarrow\phi_t(x)\le0
+$$
+
+For example:
+$$
+f_0(x)=\frac{p(x)}{q(x)}
+$$
+with $p$ convex, $q$ concave, and $p(x)\ge0,q(x)>0$, on $\bold{dom}f_0$. We may take:
+$$
+\phi_t(x)=p(x)-tq(x)
+$$
+
+- for $t\ge0$, $\phi_t$ is convex in $x$.
+- $p/q\le t$ if and only if $\phi_t(x)\le0$.
+
+#### Quasiconvex Optimization via Convex Feasibility Problems
+
+$$
+\phi_t(x)\le0,f_i(x)\le0,i=1,...,m,Ax=b
+$$
+
+- For fixed $t$, a convex feasibility problem in $x$.
+- If feasible, we can conclude that $t\ge p^*$; if infeasible, $t\le p^*$.
+
+Bisection method for quasiconvex optimization:
+
+- given $l\le p^*,u\ge p^*$, tolerance $\epsilon>0$.
+- repeat until $u-l\le\epsilon$:
+  - $t=(l+u)/2$.
+  - Solve the convex feasibility problem.
+  - If the solution is feasible, $u=t$, else $l = t$.
+
+The time complexity of this process is $\theta(\log_2(u-l)/\epsilon)$.
+
+## Linear Program (LP)
+
+### Definition
+
+$$
+\min_x c^Tx+d\\
+s.t.\begin{cases}
+Gx\preceq h\\
+Ax=b
+\end{cases}
+$$
+
+- It is a convex problem with affine objective and constraint functions.
+- Feasible set is a polyhedron.
+
+#### Diet Problem
+
+Choose quantities $x_1,x_2,...,x_n$ of $n$ foods.
+
+- One unit of food $j$ costs $c_j$, contains amount $a_{ij}$ of nutrient $i$.
+- Health diet requires nutrient in quantity at least $b_i$.
+
+To find cheapest healthy diet,
+$$
+\min_xc^Tx\\
+s.t.\quad Ax\succeq b,x\succeq0
+$$
+
+#### Piecewise-linear Minimization
+
+$$
+\min_x\max_{i=\{1,...,m\}}(a_i^Tx+b_i)
+$$
+
+equivalent LP:
+$$
+\min t\\s.t.\quad a_i^Tx+b_i\le t,i=1,...,m
+$$
+Minimizing a max is to minimizing everything in it.
+
+#### Chebyshev Center of a Polyhedron
+
+Chebyshev center of $P=\{x|a_i^Tx\le b_i,i=1,...,m\}$ is center of largest inscribed ball $B=\{x_c+u|\text{ }||u||_2\le r\}$.
+
+- $a_i^Tx\le b_i$, for all $x\in B$ if and only if
+
+$$
+\sup\{a_i^T(x_c+u)|\text{ }||u||_2\le r\}=a_i^Tx_c+r||a_i||_2\le b_i
+$$
+
+- hence, $x_c,r$ can be determined by solving the LP.
+
+$$
+\max r\\
+s.t.\quad a_i^Tx_c+r||a_i||_2\le b_i,i=1,...,m
+$$
+
+It is not necessarily a second order norm.
+

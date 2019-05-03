@@ -775,11 +775,369 @@ The signs of the pivots are same as the signs of the eigenvalues. The number of 
 
 If $A_1,...,A_n$ is the submatrix of $A$, $\det A_i>0$ means the matrix is positive definite. If $\det A_i\ge0$, the matrix is positive semi definite.
 
+### Quadratic Form
+
+$$
+x^TAx
+$$
+
+It is a linear combination of all combination of the components of $x$. The coefficient of a certain term $x_ix_j$ is $A_{ij}$. If the quadratic form of a symmetric matrix is always greater than 0 for any $x$, the matrix is positive definite. Same thing goes for semi definite.
+
+Suppose:
+$$
+f(x,y)=2x^2+12xy+7y^2,A=\begin{pmatrix}2&6\\6&7\end{pmatrix}
+$$
+Obviously, $A$ is not positive definite, for $\det A<0$.
+
+Derivatives:
+$$
+f_x=4x+12y,f_y=14y+12x,f_{xx}=4,f_{yy}=14,f_{xy}=12
+$$
+Therefore, for some little $x,y$, there is $f(x,y)<0$. The origin is a saddle point of the function, which means the first derivative of the function is 0 for some direction.
+
+Suppose:
+$$
+f(x,y)=2x^2+12xy+20y^2,A=\begin{pmatrix}2&6\\6&20\end{pmatrix}
+$$
+Obviously, $A$ is positive definite. The origin is where the function “actually” takes minimum value, by looking at the second derivative.
+
+For $f(x,y)=2x^2+12xy+20y^2$, the way of showing that it is always positive is by writing it in the form of a sum of square, or completing square.
+$$
+f(x,y)=2(x+3y)^2+2y^2
+$$
+For another case, as it is quite possible, we would have minus square terms. That is when we have a potential negative value.
+
+It is not an accident that we end up with the coefficients in this way. If we apply the process of Gaussian elimination upon the matrix:
+$$
+\begin{pmatrix}2&6\\6&20\end{pmatrix}\rightarrow\begin{pmatrix}2&6\\0&2\end{pmatrix},L=\begin{pmatrix}1&0\\3&1\end{pmatrix}
+$$
+The pivots are outside and the multiplier 3 is inside.
+
+The graph would show that it is a ellipsoid, having 3 major direction. By the transform of eigen-defactorization $Q\Lambda Q^T$, we can rotate the graph to a “standard” form, which has the 3 main direction rotated onto the axis.
+
+For the functions of $A$, such as $A^{-1},A^T,...$, we may well decide whether it is positive definite. For $A+B$ or other expressions involving anther matrix, it is not so obvious, as it is not so obvious for $\det(A+B)$ or the eigenvalues of $A+B$.
+
+If $A,B$ are both positive definite, $x^T(A+B)x=x^TAx+x^TBx>0$. It is shown the relation of positive definitive of the sum of the matrices.
+
+For the matrices that are not square, $A_{m\times n}$, we are interested in $A^TA$.
+$$
+x^TA^TAx=(Ax)^TAx=||Ax||_2^2\ge0
+$$
+equal when $x$ is $0$, and $x$, by definition, cannot be $0$. Therefore, $A^TA$ for any $A$ is positive definite.
+
+### Hessian
+
+In the world of single variable calculus, the second derivative tells the curvature of the function, by which maximum or minimum can be found or determined. Now, we expand such an idea, and define a matrix of second derivative for functions upon all dimensions.
+$$
+H_{ij}=f_{x_ix_j}
+$$
+If the matrix is positive definite, the function is convex.
+
+## Similar Matrices
+
+### Definition
+
+$A$ and $B$ are similar means, for some matrix $M$, there is $B=M^{-1}AM$. The similar matrices have identical eigenvalues. Every matrices sharing the same eigenvalues can be transformed into each other by this process. The relation in eigenvectors is shown as following:
+$$
+Ax=\lambda x\Rightarrow(M^{-1}AM)M^{-1}x=\lambda M^{-1}x\Rightarrow BM^{-1}x=\lambda M^{-1}x\Rightarrow x_B=M^{-1}x_A
+$$
+
+### Bad Case
+
+Sometimes, when we have duplicated eigenvalues, and the matrix is not diagonalizable, we would have a bad special case.
+
+For a matrix $4I$:
+$$
+4I=\begin{pmatrix}4&0\\0&4\end{pmatrix}
+$$
+Obviously, $4I$ has 2 duplicated eigenvalues $4$. However, for any matrix $M$,
+$$
+M^{-1}4IM=4I
+$$
+The family of matrices with eigenvalues $4$ and $4$ only contains $4I$, for no other matrix is similar to it except itself. Other matrices having the same eigenvalues are not diagonalizable, or the matrix would be similar to $4I$, which none does.
+$$
+\begin{pmatrix}4&1\\0&4\end{pmatrix},\begin{pmatrix}5&1\\-1&3\end{pmatrix},\begin{pmatrix}4&0\\17&4\end{pmatrix}
+$$
+We can construct these matrices by intuition as above so that they have trace $8$ and determinant $16$.
+
+Therefore, when 2 matrices have the same duplicated eigenvalues, they are not necessarily similar to each other.
+
+Define Jordan’s block, which is matrices having eigenvalues upon diagonal and 1s beside them.
+$$
+J_i=\begin{pmatrix}\lambda_i&1\\&\lambda_i&1\\&&\ddots\\&&&\lambda_i&1\\&&&&\lambda_i\end{pmatrix}
+$$
+For example:
+$$
+\begin{pmatrix}
+0&1&0&0\\
+0&0&1&0\\
+0&0&0&0\\
+0&0&0&0
+\end{pmatrix},
+\begin{pmatrix}
+0&1&0&0\\
+0&0&0&0\\
+0&0&0&1\\
+0&0&0&0
+\end{pmatrix}
+$$
+These 2 matrices have identical duplicated eigenvalues and different Jordan’s blocks. They are not similar to each other, each having a single eigenvector different from the other’s
+
+The Jordan’s theorem says: Every square matrix $A$ is similar to a Jordan matrix $J$, which is constructed by a series of Jordan blocks on their diagonals. The number of blocks is the number of eigenvectors, for from each block we solve a single eigenvector.
+$$
+J=\begin{pmatrix}
+J_1\\
+&J_2\\
+&&\ddots\\
+&&&J_d
+\end{pmatrix}
+$$
+The good case is that $J$ is $\Lambda$, in which case the matrix is perfectly diagonalizable.
+
+## Singular Value Decomposition (SVD)
+
+### Definition
+
+For any matrix $A$, we can write it in such form as:
+$$
+A=U\Sigma V^T
+$$
+where $\Sigma$ is diagonal matrix, and $U,V$ are orthonormal.
+
+A special case is $A=Q\Lambda Q^T$.
+
+The decomposition is a process as following. Suppose an equation, $\sigma u=Av$. We are trying to find the orthogonal basis for the row space of $A$ and transform it into the column space of $A$, and express the new orthonormal basis. The orthogonal basis $v$ of the row space of $A$ can be computed by the process of Graham-Schmidt’s method. The key is to find a special setup of which after multiplied by $A$, it is still an orthogonal basis.
+$$
+A\begin{pmatrix}v_1&v_2&...&v_r\end{pmatrix}=\begin{pmatrix}u_1&...&u_r\end{pmatrix}\begin{pmatrix}
+\sigma_1\\
+&\sigma_2\\
+&&\ddots\\
+&&&\sigma_r
+\end{pmatrix}\Rightarrow
+AV=U\Sigma,A=U\Sigma V^{-1}=U\Sigma V^T
+$$
+To find $V$:
+$$
+A^TA=V\Sigma^2V^T
+$$
+$A^TA$ is certainly a (semi) definite matrix. $V$‘s columns are the eigenvectors of $A^TA$ and $\sigma^2$s are the eigenvalues of $A$.
+
+To find $U$:
+$$
+AA^T=U\Sigma^2U^T
+$$
+
+### Solution
+
+For example:
+$$
+A=\begin{pmatrix}4&4\\-3&3\end{pmatrix}\Rightarrow\begin{cases}
+Av_1=\sigma_1u_1\\
+Av_2=\sigma_2u_2
+\end{cases}
+$$
+Compute $A^TA$:
+$$
+A^TA=\begin{pmatrix}25&7\\7&25\end{pmatrix}
+$$
+Compute eigenvectors:
+$$
+\begin{cases}
+\lambda_1=32,x_1=\begin{pmatrix}\frac{1}{\sqrt2}&\frac{1}{\sqrt2}\end{pmatrix}^T\\
+\lambda_2=18,x_2=\begin{pmatrix}\frac{1}{\sqrt2}&-\frac{1}{\sqrt2}\end{pmatrix}^T
+\end{cases}
+$$
+Plug in for $\Sigma,V$:
+$$
+\Sigma=\begin{pmatrix}\sqrt{32}&0\\0&\sqrt{18}\end{pmatrix},V^T=\begin{pmatrix}
+\frac{1}{\sqrt2}&\frac{1}{\sqrt2}\\
+\frac{1}{\sqrt2}&-\frac{1}{\sqrt2}
+\end{pmatrix}
+$$
+Compute $AA^T$:
+$$
+AA^T=\begin{pmatrix}32&0\\0&18\end{pmatrix}
+$$
+Compute eigenvectors:
+$$
+\begin{cases}
+\lambda_1=32,x_1=\begin{pmatrix}\frac{1}{\sqrt2}&\frac{1}{\sqrt2}\end{pmatrix}^T\\
+\lambda_2=18,x_2=\begin{pmatrix}\frac{1}{\sqrt2}&-\frac{1}{\sqrt2}\end{pmatrix}^T
+\end{cases}
+$$
+
+### Conclusion
+
+- $v_1,...,v_r$ is the orthonormal basis for row space.
+- $u_1,...,u_r$ is the orthonormal basis for column space.
+- $v_{r+1},...,v_n$ is the orthonormal basis for null space of the columns.
+- $u_{r+1},...,u_n$ is the orthonormal basis for null space of the rows.
+
+## Linear Transformations
+
+### Definition
+
+Linear transformations satisfy linear property.
+$$
+T(v+w)=T(v)+T(w),T(cv)=cT(v)\Rightarrow T(cv+dw)=cT(v)+dT(w),T(0)=0
+$$
+Not all straight forward transformations satisfy the properties above. For example,shifting planes:
+$$
+T(v)=v+v_0
+$$
+Obviously, $T(2v)=2v+v_0\ne2v+2v_0$.
+
+Other examples, such as rotation, is a linear transformation. The important one is being multiplied by a matrix. Obviously, it is a linear transformation.
+$$
+T(v)=Av
+$$
+Suppose:
+$$
+A=\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}
+$$
+It is making a symmetry according to the x-axis.
+
+We can argue that every linear transformation is a multiplication by matrix. To understand a linear transformation is to find the matrix behind it.
+
+### Extension
+
+For 2 independent vectors $v_1,v_2$, we can compute for them: $T(v_1),T(v_2)$. According to linear properties, by computing the linear combination of $v_1,v_2$, we can have all of the results of transformations on the vector space.
+
+Therefore, for any basis $v_1,...,v_n$ as input basis, we can have output basis $T(v_1),...,T(v_n)$. For any $v=c_1v_1+...+c_nv_n$, $T(n)=c_1T(v_1)+...+c_nT(v_n)$.
+
+The coordinates come from a basis. The coordinates of $v$ is given by the coefficients of the combination. Different basis gives different coordinates.
+
+### Matrix Form
+
+Construct matrix $A$ representing linear transformation $T:\R^n\rightarrow\R^m$.
+
+- Choose a basis $v_1,...,v_n$ for input.
+- Choose a basis $w_1,...,w_m$ for output.
+
+Take a projection example. We are trying to project vectors in the 2D plane onto a line, representing by a basis $w_1,w_2$, one of which is parallel to the line and the other is perpendicular to the line. Suppose the 2D plane has a basis $v_1,v_2$, where $v_1$ is parallel to the line.
+
+Obviously, for $w_1$, the corresponding output is $w_1$. For $w_2$, the corresponding output is 0.
+$$
+\begin{pmatrix}c_1\\c_2\end{pmatrix}\rightarrow\begin{pmatrix}c_1\\0\end{pmatrix}
+$$
+The matrix is:
+$$
+A=\begin{pmatrix}1&0\\0&0\end{pmatrix},A\begin{pmatrix}c_1\\c_2\end{pmatrix}=\begin{pmatrix}c_1\\0\end{pmatrix}
+$$
+If we use the eigenvectors of the matrix as basis, we would have diagonals.
+
+### Compression of Images
+
+For an image of $512*512$ pixels, we can consider it as a vector holding $(512)^2$ dimensions. Each dimension is independent to each other. The initial basis is:
+$$
+\begin{pmatrix}1\\0\\0\\\vdots\end{pmatrix},
+\begin{pmatrix}0\\1\\0\\\vdots\end{pmatrix},
+\begin{pmatrix}0\\0\\1\\\vdots\end{pmatrix},...
+$$
+Considering that some blocks, barely change color inside the blocks, may exist in the image, we may try a better set of basis.
+$$
+\begin{pmatrix}1\\1\\1\\1\\\vdots\end{pmatrix},
+\begin{pmatrix}1\\-1\\1\\-1\\\vdots\end{pmatrix},
+...
+$$
+where in all vectors the number of 1 and 0 are the same.
+
+- Change basis of the input vector $x$.
+- Express the coefficients of the new vector $C$.
+- Throw away some coefficients by making them zero according to some threshold.
+- Get a new set of coefficients $\hat C$.
+- Get a new set of pixels $\hat x$.
+
+In order to find $C$ and $\hat C$, we would solve $P=WC$, where $P$ is the input vector, $W$ is the transformation matrix, $C$ is the coefficients. A good transformation gives a good $W^{-1}$, which is neat and fast to compute. The new basis needs to be good also, so that it can represent the vector with few enough components.
+
+For the same linear transformation upon different basis, representing by $A$ and $B$,
+$$
+A=\begin{pmatrix}v_1&...&v_n\end{pmatrix},B=\begin{pmatrix}w_1&...&w_n\end{pmatrix}
+$$
+when $A$ and $B$ signify a same transformation, they are similar to each other.
+$$
+\exist M,AM=MB
+$$
+
+## Pseudo-inverse
+
+$$
+A_{m\times n},rank(A)=r
+$$
+
+### Definition
+
+Some normal inverse of a matrix would be inverse of “2 sides”:
+$$
+AA^{-1}=A^{-1}A=I
+$$
+where $m=n=r$, full rank.
+
+#### Left Inverse
+
+Left inverse exists when the matrix has full column rank, $r=n$, having independent columns. The null space only contains 0. We have 0 or 1 solution for $Ax=b$.
+
+For $A^TA$, same properties hold. $rank(A^TA)=n$. Obviously, $(A^TA)^{-1}A^T\times A=I$. Therefore, $(A^TA)^{-1}A^T$ is a left inverse of $A$. If we multiply the left inverse to the right, the result is not $I$.
+$$
+P=A(A^TA)^{-1}A^T
+$$
+It is a projection matrix upon column space.
+
+#### Right Inverse
+
+Right Inverse exists when the matrix has full row rank, $r=m$, having independent rows. The null space of the transpose only contains 0. The null space is $n-m$ dimensional. By observation, same as before, a right inverse for full row rank $A$ is $A^T(AA^T)^{-1}$.
+$$
+P=A^T(A^TA)^{-1}A^T
+$$
+It is a projection onto the row space.
+
+#### General Pseudo Inverse
+
+It is obvious that $x$ and transformation $Ax$ is strictly related to each other, namely, for $y\ne x$, $Ay\ne Ax$.
+$$
+Ax=Ay\Rightarrow A(x-y)=0\Rightarrow x-y=0
+$$
+for $x-y$ is in both the row space and the column space. Therefore, for any vector in the row space, it has a single and special vector in the column space related to it by the transformation $A$. A pseudo inverse is defined as the reverse process of such transformation.
+$$
+y=A^+(Ay)
+$$
+
+### Solution
+
+Find $A^+$.
 
 
-### How to Tell
-
-- Definitions
-
-#### Determinant
-
+$$
+A=U\Sigma V^T
+$$
+where:
+$$
+\Sigma=\begin{pmatrix}
+\sigma_1&&&&O\\
+&\sigma_2\\
+&&\ddots\\
+&&&\sigma_r\\
+O&&&&O
+\end{pmatrix}_{m\times n},r<m,r<n
+$$
+The pseudo inverse of the diagonal matrix is:
+$$
+\Sigma^+=\begin{pmatrix}
+1/\sigma_1&&&&O\\
+&1/\sigma_2\\
+&&\ddots\\
+&&&1/\sigma_r\\
+O&&&&O
+\end{pmatrix}_{n\times m}
+$$
+so that:
+$$
+\Sigma\Sigma^+=\begin{pmatrix}I&O\\O&O\end{pmatrix}_{m\times m},\Sigma^+\Sigma=\begin{pmatrix}I&O\\O&O\end{pmatrix}_{n\times n}
+$$
+In the end:
+$$
+A^+=V\Sigma^+U^T
+$$
