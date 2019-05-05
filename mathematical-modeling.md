@@ -77,6 +77,44 @@ $$
 $$
 The approach is obviously wrong, for the first order approximation is not satisfied. If we look at the first row and its dot product, we have $u_1-u_2=1$, certainly wrong. If we change the first number of the right-hand side to be $1/2$, the solution will be exactly right.
 
+### Delta Function
+
+$$
+-\frac{d^2u}{dx}=\delta(x-a),u(0)=0,u(1)=0
+$$
+
+#### Definition of Delta Function
+
+$$
+\delta(x)=\begin{cases}
+\infty&x=0\\
+0&x\ne0
+\end{cases}
+$$
+
+Some transformation:
+$$
+\delta(x-a)=\begin{cases}
+\infty&x=a\\
+0&x\ne a
+\end{cases},\int_{-\infty}^x\delta(u)du=\begin{cases}0&x<0\\1&x\ge0\end{cases}
+$$
+The integral of the delta function is the step function, as shown above. The area under the “spike” is defined to be 1.
+
+If we integrate the product of the delta function and some other nice function, the result is the magnitude of the other function.
+$$
+\int^\infty_{-\infty}\delta(x-a)g(x)dx=g(a)
+$$
+The integral of the step function is the ramp function, the integral of which is a parabola, and so on and so forth. The cubic result is called cubic spline, which is $x^3/6$, and looks close to the horizontal line at $x=0$.
+
+#### Solution
+
+$$
+u(x)=-Ramp(x-a)+C+Dx
+$$
+
+For $-u''=\delta(x-a)$, no matter what the restrictions are, the solution is always a continuous graph consisting of 2 straight line, differ in slope on the 2 different sides of $x=a$. Sometimes a triangle, sometimes a trapezoid, sometimes other similar shapes.
+
 ## Linear System
 
 $$
