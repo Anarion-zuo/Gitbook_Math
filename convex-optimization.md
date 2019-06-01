@@ -10,8 +10,8 @@ s.t.\quad f_i(x)\le b_i
 $$
 
 - $x=(x_1,...,x_n)$: optimization variables
-- $f_0:R^n-\rightarrow R$: objective function
-- $f_i:R^n\rightarrow,i=1,...,m$: constraint functions
+- $f_0:\R^n\rightarrow \R$: objective function
+- $f_i:\R^n\rightarrow \R,i=1,...,m$: constraint functions
 - The objective and constraints are convex.
 
 $$
@@ -77,6 +77,13 @@ A convex hull of set $S$ is a set of all convex combinations of points in $S$. F
 
 ![1554104725503](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1554104725503.png)
 
+### Cone
+
+If $C$ is a cone, $x\in C$,
+$$
+\alpha x\in C,\alpha>0
+$$
+
 ### Convex Cone
 
 A nonnegative conic combination of $x_1$ and $x_2$ is: at any point of the form
@@ -88,6 +95,8 @@ with $\theta_1\ge0,\theta_2\ge0$.
 ![1554104989538](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1554104989538.png)
 
 It becomes a convex cone when $\theta_1+\theta_2=1$.
+
+It is a special convex hull with only 2 bases.
 
 ### Hyperplanes and Halfspaces
 
@@ -113,8 +122,10 @@ $$
 Norm is a function $||\quad||$ that satisfies:
 
 - $||x||\ge0,||x||=0$ if and only if $x=0$.
-- $||tx||=|t|||x||,\forall t\in R$.
+- $||tx||=|t|||x||,\forall t\in \R$.
 - $||x+y||\le||x||+||y||$.
+
+The convexity involving norms is often derived from the last property.
 
 A norm with a subscript is a particular norm.
 $$
@@ -128,6 +139,8 @@ Norm cone:
 $$
 \{(x,t)|\text{ }||x||\le t\}
 $$
+![img](D:\Gitbook\Gitbook_Math\static\v2-b37403be7c2793739fa488f6733cf6be_hd.jpg)
+
 Both are solid figures.
 
 ### Polyhedra
@@ -136,15 +149,17 @@ Polyhedra is a solution set of finitely many linear inequalities and equalities.
 $$
 \{x|Ax\preceq b,Cx=d\},A,C\in\R^{m\times n},\preceq\text{ is componentwise inequality}
 $$
-Component-wise inequality means the inequality satisfies for each component of the vector. There fore, a polyhedra signifies a convex shape.
+Component-wise inequality means the inequality satisfies for each component of the vector. Therefore, a polyhedra signifies a convex shape.
 
 ### Positive Semi-definite Cone
 
-Positive semi-definite cone $S^n$ is a set of symmetric $n\times n$ matrices. $S^n_+=\{X\in S^n|X\succeq0\}$. It is a convex cone.
+$S^n$ is a set of symmetric $n\times n$ matrices. Positive semi-definite cone $S^n_+=\{X\in S^n|X\succeq0\}$. It is a convex cone.
 $$
 X\in S^n_+\Leftrightarrow z^TXz\ge0,\forall z
 $$
 A positive definite is $S^n_{++}=\{X\in S^n|X\succ0\}$.
+
+![img](D:\Gitbook\Gitbook_Math\static\v2-093ad36ff5bcaadcd504cf35dec891e4_hd.jpg)
 
 ### Operations preserving Convexity
 
@@ -253,7 +268,7 @@ Examples on $\R^1$,
 
 - Affine: $ax+b$ on $\R$, $\forall a,b\in\R$.
 - Exponential: $e^{ax}$.
-- Powers: $x_\alpha$ on $R_{++}$, $\forall\alpha\ge1$ or $\forall\alpha\le0$.
+- Powers: $x^\alpha$ on $R_{++}$, $\forall\alpha\ge1$ or $\forall\alpha\le0$.
 - Powers of absolute value: $|x|^p$ on $\R$, $\forall p\ge1$.
 - Negative entropy: $x\ln x$ on $R_{++}$.
 
@@ -286,7 +301,7 @@ g(t)=f(x+tv),\bold{dom}g=\{t|x+tv\in\bold{dom}f\}
 $$
 where $f$ is convex, is convex. We can thus check the convexity of functions of $f$ by checking convexity of functions of one variable.
 
-For example, $f:S^n\rightarrow\R,f(X)=\ln\detX,\bold{dom}X=S^n_{++}$,
+For example, $f:S^n\rightarrow\R,f(X)=\ln\det X,\bold{dom}X=S^n_{++}$,
 $$
 g(t)=\ln\det(X+tV)=\ln\det X+\ln\det(E+tX^{-1/2}VX^{-1/2})=\ln\det X+\sum_{i=1}^n\ln(1+t\lambda_i)
 $$
@@ -422,7 +437,7 @@ Here the relation between convex set and probability is revealed.
 
 #### Point-wise Maximum and Supremum
 
-If $f_1,...,f_m$ are convex, $f(x)=\max\{f_x(x),...,f_m(x)\}$ is convex.
+If $f_1,...,f_m$ are convex, $f(x)=\max\{f_1(x),...,f_m(x)\}$ is convex.
 
 Extend the idea to supremum. If $f(x,y)$ is convex in $x$ for each $y\in A$,
 $$
@@ -536,7 +551,7 @@ $$
 
 A positive function $f$ is log-concave if $\ln f$ is concave:
 $$
-f(\theta x+(1-\theta)y)\ge f(x)^\theta f(y)^{(1-\theta)}\forall0\le\theta\le1
+f(\theta x+(1-\theta)y)\ge f(x)^\theta f(y)^{(1-\theta)},\forall0\le\theta\le1
 $$
 $f$ is log-convex if $\ln f$ is convex.
 
@@ -546,7 +561,7 @@ $f$ is log-convex if $\ln f$ is convex.
 
 $$
 f_0(x)\rightarrow \min\\
-s.t.\quad\begin{align*}&f_i(x)\le,i=1,...,m\\&h_i(x)=0,i=1,...,p\end{align*}
+s.t.\quad\begin{align*}&f_i(x)\le0,i=1,...,m\\&h_i(x)=0,i=1,...,p\end{align*}
 $$
 
 - $x\in\R^n$ is the optimization variable
@@ -554,7 +569,7 @@ $$
 - $f_i:\R^n\rightarrow\R,i=1,...,m$ are inequality constraint functions
 - $h_i:\R^n\rightarrow\R$ are the equality constraint functions
 
-optimal value:
+The optimal value is the smallest value of the cost function for all $x$ satisfying the constraints.
 $$
 p^*=\inf\{f_0(x)|f_i(x)\le0,i=1,...,m,h(x_i)=0,i=1,...,p\}
 $$
@@ -570,7 +585,7 @@ $$
 
 $$
 f_0(z)\rightarrow \min\\
-s.t.\quad\begin{cases}&f_i(z)\le,i=1,...,m\\&h_i(z)=0,i=1,...,p\\&||z-x||_2\le R\end{cases}
+s.t.\quad\begin{cases}&f_i(z)\le0,i=1,...,m\\&h_i(z)=0,i=1,...,p\\&||z-x||_2\le R\end{cases}
 $$
 
 Examples:
@@ -899,4 +914,484 @@ s.t.\quad a_i^Tx_c+r||a_i||_2\le b_i,i=1,...,m
 $$
 
 It is not necessarily a second order norm.
+
+### (Generalized) Linear-Fractional Program
+
+$$
+f_0(x)=\frac{c^Tx+d}{e^Tx+f},\bold{dom}f_0(x)=\{x|e^Tx+f>0\}
+$$
+
+- The sign of the denominator must be specified.
+- It is a quasiconvex optimization problem, and can be solved by bisection.
+
+$$
+\min_{x,t}f_0(x)\\s.t.\quad\begin{cases}
+c^Tx+d\le t(e^Tx+f)
+\end{cases}
+$$
+
+
+
+- Also equivalent to the LP:
+
+$$
+\min_{y,z}c^Ty+dz\\s.t.\quad\begin{cases}
+Gy\preceq hz\\
+Ay=bz\\
+e^Ty+fz=1\\
+z\ge0
+\end{cases}
+$$
+
+If we have multiple coefficients:
+$$
+f_0(x)=\max_{i=1,...,r}\frac{c_i^Tx+d_i}{e_i^Tx+f_i},\bold{dom}f_0(x)=\{x|e_i^Tx+f_i>0,i=1,...,r\}
+$$
+This is a quasiconvex optimization problem, and can be solved by bisection.
+
+For example, the Von Neumann model of a growing economy:
+$$
+\max_{x,x^+}\min_{i=1,...,r}\frac{x_i^+}{x_i}\\s.t.\quad\begin{cases}
+x^+\succeq0\\
+x\succeq0\\
+Bx^+\preceq Ax
+\end{cases}
+$$
+
+- $x,x^+\in\R^n$: activity levels of $n$ sectors, in current and the next period.
+- $(Ax)_i,(Bx^+)_i$: produced respect to consumed amounts of good $i$.
+- $x_i^+/x_i$: growth rate of sector $i$.
+
+The problem is to allocate activity to maximize growth rate of slowest growing sector.
+
+## Quadratic Program (QP)
+
+$$
+\min_x\frac{1}{2}x^TPx+q^Tx+r\\s.t.\begin{cases}
+Gx\preceq h\\
+Ax=b
+\end{cases}
+$$
+
+- $P\in S^n_+$, so objective is convex quadratic.
+- Minimize a convex quadratic function over a polyhedron.
+
+By thinking of the shape of the domain of linear programs and quadratic program, we may notice that the solution of linear program always occur in the vertex while quadratic program does not.
+
+### Least Square
+
+$$
+\min_x||Ax-b||_2^2
+$$
+
+- The analytical solution is $x^*=A^\dagger b$, taking the pseudo inverse.
+- We can also add linear constraints to it. $e.g.\quad l\preceq x\preceq u$.
+
+For example, linear program with random cost:
+$$
+\min_x\bar c^Tx+\gamma x^T\Sigma x=\bold Ec^Tx+\gamma\bold{var}(c^x)\\s.t.\quad Gx\preceq h,Ax=b
+$$
+
+- $c$ is a random vector with mean $\bar c$ and covariance $\Sigma$.
+- Hence, $c^Tx$ is random variable with mean $\bar c^Tx$ and variance $x^T\Sigma x$.
+- $\gamma>0$ is risk aversion parameter, which controls the trade off between expected cost and variance (risk).
+
+### Quadratically Constrained Quadratic Program (QCQP)
+
+$$
+\min_x\frac{1}{2}x^TP_0x+q_0^Tx+r_0\\s.t.\quad
+\frac{1}{2}x^TP_ix+q_i^Tx+r_i\le0,i=1,...,m,Ax=b
+$$
+
+- $P_i\in \bold S_+^n$: objective and constraints are convex quadratic.
+- If $P_1,...,P_m\in\bold S_{++}^n$: feasible region is intersection of $m$ ellipsoids and an affine set.
+
+### Second-order Cone Program (SOCP)
+
+$$
+\min_xf^Tx\\s.t.\begin{cases}
+||A_ix+b_i||_2\le c_i^Tx+d_i&i=1,...,m\\
+Fx=g
+\end{cases},A_i\in\R^{n_i\times n},F\in\R^{p\times n}
+$$
+
+- $f^Tx$ is some function of some vector $x$.
+- Inequalities are called second-order cone (SOC) constraints:
+
+$$
+(A_ix+b_ic_i^Tx+d_i)\in\text{second-order cone in }\R^{n_i+1}
+$$
+
+- For $n_i=0$, the problem is reduced to an LP. If $c_i=0$, the problem is reduced to a QCQP.
+- The problem is more general than QCQP and LP.
+
+### Robust Linear Programming
+
+The parameters in optimization problems are often uncertain. For example, in LP:
+$$
+\min c^Tx,\qquad s.t.\quad a_i^Tx\le b_i,i=1,...,m
+$$
+there can be uncertainty in $c,a_i,b_i$.
+
+Two common approaches to handling uncertainty (in $a_i$, for simplicity):
+
+- Deterministic model: constraints must hold $\forall a_i\in\mathscr E_i$.
+
+$$
+\min c^Tx,\qquad s.t.\quad a_i^Tx\le b_i,i=1,...,m,\forall a_i\in\mathscr E_i
+$$
+
+- Stochastic model: $a_i$ is a random variable. Constraints must hold with probability $\eta$.
+
+$$
+\min c^Tx,\qquad s.t.\quad \bold{prob}(a_i^Tx\le b_i)\ge\eta,i=1,...,m
+$$
+
+#### Deterministic Approach via SOCP
+
+- Choose an ellipsoid as $\mathscr E_i$:
+
+$$
+\mathscr E_i=\{\bar a_i+P_iu|\text{ }||u||_2\le1\},\bar a_i\in\R^n,P_i\in\R^{n\times n}
+$$
+
+the center is $\bar a_i$, semi-axes determined by singular values or vectors of $P_i$.
+
+- Robust LP
+
+$$
+\min c^Tx,\qquad s.t.\quad a_i^Tx\le b_i,i=1,...,m,\forall a_i\in\mathscr E_i
+$$
+
+is equivalent to the SOCP
+$$
+\min c^Tx,\qquad s.t.\quad\bar a_i^Tx+||P_i^Tx||_2\le b_i,i=1,...,m
+$$
+follows from:
+$$
+\sup_{||u||_2\le1}(\bar a_i+P_iu)^Tx=\bar a_i^Tx+||P_i^Tx||_2
+$$
+
+#### Stochastic Approach via SOCP
+
+- Assume $a_i$ is Gaussian with mean $\bar a_i$, covariance $\Sigma_i$. $a_i\sim\mathscr N(\bar a_i,\Sigma_i)$
+- $a_i^Tx$ is Gaussian r.v. with mean $\bar a_i^Tx$, variance $x^T\Sigma_ix_i$, hence:
+
+$$
+\bold{prob}(a_i^Tx\le b_i)=\Phi(\frac{b_i-\bar a_i^Tx}{||\Sigma_i^\frac{1}{2}x||_2})
+$$
+
+where $\Phi(x)=(1/\sqrt{2\pi})\int_{-\infty}^x\exp(-t^2/2)$ is CDF of $\mathscr N(0,1)$.
+
+- Robust LP
+
+$$
+\min c^Tx,\qquad s.t.\quad \bold{prob}(a_i^Tx\le b_i)\ge\eta,i=1,...,m
+$$
+
+when $\eta\ge1/2$, it is equivalent to the SOCP:
+$$
+\min c^Tx,\qquad s.t.\quad \bar a_i^Tx+\phi^{-1}(\eta)||\Sigma_i^\frac{1}{2}||_2\le b_i,i=1,...,m
+$$
+
+## Geometric Programming (GP)
+
+Monomial function:
+$$
+f(x)=cx_1^{\alpha_1}x_2^{\alpha_2}...x_n^{\alpha_n},\bold{dom}f=\R_{++}^n
+$$
+with $c>0$. Exponent $\alpha_i$ can be any real number.
+
+Posynomial function: sum of monomials
+$$
+f(x)=\sum_{k=1}^Kcx_1^{\alpha_{1k}}x_2^{\alpha_{2k}}...x_n^{\alpha_{nk}},\bold{dom}f=\R_{++}^n
+$$
+Geometric program (GP):
+$$
+\min_x f_0(x)\\s.t.\begin{cases}
+f_i(x)\le1&i=1,...,m\\
+h_i(x)=1&i=1,...,p
+\end{cases}
+$$
+with $f_i$ posynomial, $h_i$ monomial.
+
+### Geometric Program in Convex form
+
+Change variable to $y_i=\ln x_i$ and take logarithm of cost, constraints.
+
+Monomial $f(x)=cx_1^{\alpha_1}x_2^{\alpha_2}...x_n^{\alpha_n}$ transforms to:
+$$
+\ln f(c^{y_1}...c^{y_n})=a^Ty+b,b=\ln c
+$$
+Posynomial $f(x)=\sum_{k=1}^Kcx_1^{\alpha_{1k}}x_2^{\alpha_{2k}}...x_n^{\alpha_{nk}}$ transforms to:
+$$
+\ln f(c^{y_1}...c^{y_n})=\ln(\sum_{k=1}^K\exp(a_k^Ty+b_k)),b_k=\ln c_k
+$$
+Geometric program transforms to convex problem:
+$$
+\min_y\ln(\sum_{k=1}^K\exp(a_{0k}^Ty+b_{0k}))\\s.t.\begin{cases}
+\ln(\sum_{k=1}^K\exp(a_{ik}^Ty+b_{ik}))\le0&i=1,...,m\\
+Gy+d=0
+\end{cases}
+$$
+
+### Design of Cantilever Beam
+
+![1557318265583](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1557318265583.png)
+
+- $N$ segments with unit lengths, rectangular cross-sections of size $w_i\times h_i$.
+- Given vertical force $F$ applied at the right end.
+
+The goal of designing is to minimize the total weight.
+
+![1557318363185](C:\Users\a\AppData\Roaming\Typora\typora-user-images\1557318363185.png)
+
+variables: $w_i,h_i,i=1,...,N$.
+
+- Total weight $w_1h_1+...+w_Nh_N$ is posynomial.
+- Aspect ratio $h_i/w_i$ and inverse aspect ratio $w_i/h_i$ are monomials.
+- Maximum stress in segment $i$ is given by $6iF/(w_ih_i^2)$, a monomial.
+- The vertical deflection $y_i$ and slope $v_i$ of central axis at the right end of segment $i$ are defined recursively as:
+
+$$
+v_i=12(i-\frac{1}{2})\frac{F}{Ew_ih_i^3}+v_{i+1},y_i=6(i-\frac{1}{3})\frac{F}{Ew_ih_i^3}+v_{i+1}+y_{i+1}
+$$
+
+for $i=N,N-1,...,1$, with $v_{N+1}=y_{N+1}=0$ and $E$ is the Yong’s modulus. $v_i$ and $y_i$ are posynomial functions of $w,h$.
+
+### Minimizing Spectral Radius of Nonnegative Matrix
+
+#### Perron-Frobenius Eigenvalue $\lambda_{pf}(A)$
+
+- Exists for (elementwise) positive $A\in\R^{n\times n}$.
+- A real, positive eigenvalue of $A_i$, equal to spectral radius $\max_i|\lambda_i(A)|$.
+- Determines asymptotic growth (decay) rate of $A^k:A^k\sim\lambda_{pf}^k$ as $k\rightarrow\infty$.
+
+### Generalized Inequality Constraints
+
+Convex problem with generalized inequality constraints:
+$$
+\min f_0(x)\\s.t.\quad\begin{cases}
+f_i(x)\preceq_{K_i}0&i=1,...,m\\
+Ax=b
+\end{cases}
+$$
+
+- $f_0:\R^n\rightarrow\R$ convex; $f_i:\R^n\rightarrow\R^{k_i}$, $K_i$-convex w.r.t. proper cone $K_i$
+- same properties as standard convex problem (convex feasible set, local optimum is global, etc.)
+
+#### Conic Form Problem
+
+This is a special case with affine objective and constraints.
+$$
+\min c^Tx\\s.t.\begin{cases}
+Fx+g\preceq_{K}0\\
+Ax=b
+\end{cases}
+$$
+extends linear programming ($K=\R^{m}_+$) to non-polyhedral cones.
+
+## Semidefinite Program (SDP)
+
+$$
+\min c^Tx\\s.t.\quad\begin{cases}
+x_1F_1+x_2F_2+...+x_nF_n+G\preceq0\\
+Ax=b
+\end{cases}
+$$
+
+with $F_i,G\in S^k$.
+
+The name means that the left hand side is semidefinite.
+
+- inequality constraint is called linear matrix inequality (LMI)
+- includes problems with multiple LMI constraints: for example:
+
+$$
+x_1\bar F_1+...+x_n\bar F_n+\bar G\preceq0,x_1\bar F_1+...+x_n\bar F_n+\bar G\preceq0,
+$$
+
+is equivalent to single LMI:
+$$
+x_1\begin{pmatrix}\bar F_1&0\\0&\bar F_1\end{pmatrix}+x_2\begin{pmatrix}\bar F_2&0\\0&\bar F_2\end{pmatrix}+...+x_n\begin{pmatrix}\bar F_n&0\\0&\bar F_n\end{pmatrix}+\begin{pmatrix}\bar G&0\\0&\bar G\end{pmatrix}\preceq0
+$$
+Therefore we always work with one LMI in general.
+
+Many other problems can be transformed into a SDP, called SDP embedding.
+
+### LP and Equivalent SDP
+
+LP:
+$$
+\min c^Tx\qquad s.t.\quad Ax\preceq b
+$$
+SDP:
+$$
+\min c^Tx\qquad s.t.\quad diag(Ax-b)\preceq0
+$$
+
+### SOCP and Equivalent SDP
+
+SOCP:
+$$
+\min f^Tx\qquad s.t.\quad||A_ix+b_i||_2\le c_i^Tx+d_i,i=1,...,m
+$$
+SDP:
+$$
+\min f^Tx\qquad s.t.\quad\begin{pmatrix}
+(c_i^Tx+d_i)I&A_ix+b_i\\
+(A_ix+b_i)^T&c_i^Tx+d_i
+\end{pmatrix}\succeq0,i=1,...,m
+$$
+Another way of representing the semidefinite term is by the determinant:
+$$
+(c_i^T+d_i)^2\ge(A_ix+b_i)^T(A_ix+b_i)
+$$
+
+### Eigenvalue Minimization
+
+$$
+\min \lambda_{max}(A(x))
+$$
+
+where $A(x)=A_0+x_1A_1+...+x_nA_n,A_i\in S^k$, and $\lambda(A)$ means the set of the eigenvalue of matrix $A$.
+
+Equivalent SDP:
+$$
+\min t\qquad s.t.\quad A(x)\preceq tI
+$$
+
+- variables $x\in\R^n,t\in\R$
+- follows from
+
+$$
+\lambda_{max}(A)\le t\Leftrightarrow A\preceq tI
+$$
+
+### Matrix Norm Minimization
+
+$$
+\min||A(x)||_2=\sqrt{\lambda_{max}(A(x)^TA(x))}
+$$
+
+where $A(x)=A_0+x_1A_1+...+x_nA(n),A_i\in\R^{p\times q}$.
+
+Equivalent SDP:
+$$
+\min t\qquad s.t.\quad\begin{pmatrix}
+tI&A(x)\\
+A(x)^T&tI
+\end{pmatrix}\succeq0
+$$
+
+- variables $x\in\R^n,t\in\R$
+- constraint follows from
+
+$$
+||A||_2\le t\Leftrightarrow A^TA\preceq t^2I,t\ge0\Leftrightarrow\begin{pmatrix}
+tI&A\\
+A^T&tI
+\end{pmatrix}\succeq0
+$$
+
+## Vector Optimization
+
+General vector optimization problem:
+$$
+\min(\text{w.r.t }K)f_0(x)\\s.t.\quad\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+h_i(x)\le0&i=1,...,p
+\end{cases}
+$$
+Vector objective $f_0:\R^n\rightarrow\R^q$, minimized w.r.t. proper cone $K\in\R^q$. (w.r.t. = with reference to)
+
+Convex vector optimization problem:
+$$
+\min(\text{w.r.t }K)f_0(x)\\s.t.\quad\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+Ax=b
+\end{cases}
+$$
+with $f_0$ $K$-convex, $f_1,...,f_m$ convex.
+
+The problem is to minimize a vector over some space. For scalars, the semantic of minimization is obvious, while for vectors, not always. Here, we apply the rules of element wise comparison.
+
+### Optimal and Pareto Optimal Points
+
+Set of achievable objective values:
+$$
+O=\{f_0(x)|x\text{ feasible}\}
+$$
+
+- Feasible $x$ is optimal if $f_0(x)$ is a minimum value of $O$. A minimum value is the one in the set whose other values are all less than or equal to it. A minimum in a certain set is the optimal value unambiguously, which means all other vectors has larger of equal corresponding components.
+- Feasible $x$ is Pareto optimal if $f_0(x)$ is a minimal value of $O$. A minimal in a certain set is the “best choice” not necessarily fit the definition of a minimum value. There exists a set of vectors in the set holding larger corresponding components, while there are also vectors holding some corresponding components larger than its, and some others smaller than its. As is shown in the following picture, a minimal makes sure that the value is better than all others in the shadowed area on the right up side of it, and no others exists in the left bottom side of it.
+
+![1559361082088](../../../../.config/Typora/typora-user-images/1559361082088.png)
+
+![1559361158794](../../../../.config/Typora/typora-user-images/1559361158794.png)
+
+Any points in the shadowed area is beat by the $x^{po}$, while the rest of the points are not comparable to it.
+
+### Multicriterion Optimization
+
+It is a vector optimization with $K=\R^q_+$.
+$$
+f_0(x)=(F_1(x),F_2(x),...,F_q(x))
+$$
+
+- $q$ different objectives $F_i$. Roughly speaking, we want all $F_i$‘s to be small.
+- feasible $x^*$ is optimal if
+
+$$
+y\text{ feasible}\Rightarrow f_0(x^*)\preceq f_0(y)
+$$
+
+if there exists an optimal point, the objectives are noncompeting.
+
+- feasible $x^{po}$ is Pareto optimal if
+
+$$
+y\text{ feasible},f_0(y)\preceq f_0(x^{po})\Rightarrow f_0(x^{po})=f_0(y)
+$$
+
+if there are multiple Pareto optimal values, there is a trade-off between the objectives.
+
+### Regularized Least-squares
+
+$$
+\min(w.r.t\R^2_+)\quad(||Ax-b||_2^2,||x||_2^2)
+$$
+An example for $A\in\R^{100\times10}$:
+
+![1559373972603](../../../../.config/Typora/typora-user-images/1559373972603.png)
+
+The heavy line is formed by Pareto optimal points.
+
+### Scalarization
+
+To find Pareto optimal points: choose $\lambda\succ_{K^*}0$ and solve scalar problem:
+$$
+\min_x\lambda^Tf_0(x)\\s.t.\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+h_i(x)=0&i=1,...,p
+\end{cases}
+$$
+If $x$ is optimal for the scalar problem, it is Pareto-optimal for vector optimization problem. For convex vector optimization problems, this can find (almost) all Pareto optimal points by varying $\lambda\succ_{K^*}0$.
+
+$f_0(x_3)$ cannot be found by scalarization, for it is not a convex vector optimization problem:
+
+![1559375953335](../../../../.config/Typora/typora-user-images/1559375953335.png)
+
+#### Scalarization for Multicriterion Problems
+
+To find Pareto optimal points, minimize positive weighted sum:
+$$
+\lambda^Tf_0(x)=\lambda_1F_1(x)+...+\lambda_qF_q(x)
+$$
+If we take $\lambda^T=(1,\gamma)$, we have the L2 regularization problem:
+$$
+\min_x||Ax-b||_2^2+\gamma||x||_2^2
+$$
+
+## Duality
 
