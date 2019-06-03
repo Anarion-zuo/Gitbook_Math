@@ -1395,3 +1395,109 @@ $$
 
 ## Duality
 
+### Lagrangian
+
+The standard form of a problem, not necessarily convex, is:
+$$
+\min f_0(x)\\s.t.\quad\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+h_i(x)=0&i=1,...,p
+\end{cases}
+$$
+variable $x\in\R^n$, domain $D$, optimal value $p^*$.
+
+The problem can be transformed into a Lagrangian problem: $L:\R^n\times\R^m\times\R^p$, with $\bold{dom}L=D\times\R^m\times\R^p$,
+$$
+L(x,\lambda,\nu)=f_0(x)+\sum_{i=1}^m\lambda_if_i(x)+\sum_{i=1}^p\nu_ih_i(x)
+$$
+
+- take the linear combination of the restraints.
+- $\lambda_i$ is Lagrange multiplier associated with $f_i(x)\le0$.
+- $\nu_i$ is Lagrange multiplier associated with $h_i(x)=0$.
+
+#### Lagrange Dual Function
+
+Definition $g:\R^m\times\R^p\rightarrow\R$:
+$$
+g(\lambda, \nu)=\inf_{x\in D}L(x,\lambda,\nu)=\inf_{x\in D}(f_0(x)+\sum_{i=1}^m\lambda_if_i(x)+\sum_{i=1}^p\nu_ih_i(x))
+$$
+$g$ is affine with respect to $\lambda$ or $\nu$, can be $-\infty$ for some $\lambda,\nu$.
+$$
+\begin{align*}
+&g(\theta_1\lambda_1+\theta_2\lambda_2,\theta_1\nu_1+\theta_2\nu_2)\\
+=&\inf_{x\in D}(f_0(x)+\sum_{i=1}^m(\theta_1\lambda_1^{(i)}+\theta_2\lambda_2^{(i)})f_i(x)+\sum_{i=1}^p(\theta_1\nu_1^{(i)}+\theta_2\nu_2^{(i)})h_i(x))\\
+=&\inf_{x\in D}((1-\theta_1-\theta_2)f_0(x)+\theta_1(f_0(x)+\sum_{i=1}^m\lambda_1^{(i)}f_i(x)+\sum_{i=1}^p\nu_1^{(i)}h_i(x)))+\theta_2(f_0(x)+\sum_{i=1}^m\lambda_2^{(i)}f_i(x)+\sum_{i=1}^p\nu_2^{(i)}h_i(x)))\\
+=&\inf_{x\in D}((1-\theta_1-\theta_2)f_0(x))+\theta_1g(\lambda_1,\nu_1)+\theta_2g(\lambda_2,\nu_2)\\
+=&\theta_1g(\lambda_1,\nu_1)+\theta_2g(\lambda_2,\nu_2)
+\end{align*}
+$$
+There is the following property of the dual function:
+$$
+\forall\tilde x\text{ feasible},f_0(\tilde x)\ge f_0(x)+\sum_{i=1}^m\lambda_if_i(x)+0= L(\tilde x,\lambda,\nu)\ge\inf_{x\in D}L(x,\lambda,\nu)=g(\lambda,\nu)
+$$
+minimizing over all feasible $\tilde x$ gives $p^*$:
+$$
+p^*\ge g(\lambda,\nu)
+$$
+This is the lower bound property.
+
+#### Least-Norm Solution of Linear Equations
+
+$$
+\min_xx^Tx,\qquad s.t.Ax=b
+$$
+
+- Lagrangian is $L(x,\nu)=x^Tx+\nu^T(Ax-b)$
+- to minimize $L$ over $x$, set gradient equal to 0:
+
+$$
+\nabla_xL(x,\nu)=2x+A^T\nu=0,x=-\frac{1}{2}A^T\nu
+$$
+
+- Plug in $L$ to obtain $g$:
+
+$$
+g(\nu)=-\frac{1}{4}\nu^TAA^T\nu-b^T\nu
+$$
+
+This is a concave function of $\nu$.
+
+Apply the lower bound property:
+$$
+p^*\ge-\frac{1}{4}\nu^TAA^T\nu-b^T\nu
+$$
+
+#### Standard Form LP
+
+$$
+\min_xc^Tx\qquad s.t.Ax=b,x\succeq0
+$$
+
+- Lagrangian is:
+
+$$
+L(x,\lambda,\nu)=c^Tx+\nu^T(Ax-b)-\lambda^Tx=-b^T\nu+(c+A^T\nu-\lambda)^Tx
+$$
+
+- $L$ is affine in $x$, hence:
+
+$$
+g(\lambda,\nu)=\begin{cases}
+-b^T\nu&A^T\nu-\lambda+c=0\\
+-\infty&otherwise
+\end{cases}
+$$
+
+$g$ is linear on affine domain $\{(\lambda,\nu)|A^T\nu-\lambda+c=0\}$, hence concave.
+
+Apply lower bound property:
+$$
+p^*\ge-b^T\nu,\text{ if }A^T\nu+c\ge0
+$$
+
+#### Equality Constrained Norm Minimization
+
+$$
+\min_x||x||\qquad s.t.Ax=b
+$$
+
