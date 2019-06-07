@@ -1433,7 +1433,7 @@ $$
 $$
 There is the following property of the dual function:
 $$
-\forall\tilde x\text{ feasible},f_0(\tilde x)\ge f_0(x)+\sum_{i=1}^m\lambda_if_i(x)+0= L(\tilde x,\lambda,\nu)\ge\inf_{x\in D}L(x,\lambda,\nu)=g(\lambda,\nu)
+\forall\tilde x\text{ feasible},f_0(\tilde x)\ge f_0(\tilde x)+\sum_{i=1}^m\lambda_if_i(\tilde x)+0= L(\tilde x,\lambda,\nu)\ge\inf_{x\in D}L(x,\lambda,\nu)=g(\lambda,\nu)
 $$
 minimizing over all feasible $\tilde x$ gives $p^*$:
 $$
@@ -1495,9 +1495,135 @@ $$
 p^*\ge-b^T\nu,\text{ if }A^T\nu+c\ge0
 $$
 
+If one ever finds a $\nu$ such that $A^T\nu+c\ge0$, the lower bound of the LP is set.
+
 #### Equality Constrained Norm Minimization
 
 $$
 \min_x||x||\qquad s.t.Ax=b
 $$
 
+Dual function:
+$$
+g(\nu)=\inf_x(||x||-\nu^TAx+b^T\nu)=\begin{cases}
+b^T\nu& ||A^T\nu||_*\le1\\
+-\infty&otherwise
+\end{cases}
+$$
+where $||v||_*=\sup_{||u||\le1}u^Tv$ is the dual norm of $||\text{ .}||$.
+
+For $\vec x\in\R^n$, the result of $\inf_x(||x||-y^Tx)$ is as follows. If the dual norm of $y$ is larger than 1, the latter term would overpower the first term and the result of $-\infty$, or otherwise 0, for the latter term cannot overpower the first and the whole expression can only be larger or equal to 0.
+$$
+\inf_x(||x||-y^Tx)=\begin{cases}
+0&||y||_*\le1\\
+-\infty&||y||_*>1
+\end{cases}
+$$
+Apply the lower bound property:
+$$
+p^*\ge-b^T\nu,\text{ if }||A^T\nu||_*\le1
+$$
+
+#### Two-Way Partitioning
+
+$$
+\min_Wx^TWx=\sum_{i,j}x_ix_jW_{ij}\qquad s.t.\quad x_i^2=1,i=1,...,n
+$$
+
+The purpose of the problem is to partition a set of points into 2 different sets, where $x_i=1$ or $x_i=-1$. If $i$ and $j$ are in the same partition, the product is 1. $W_{ij}$ is the measure of how much $i$ hates $j$, or $j$ hates $i$. If $W_{ij}$ is very high, an the product is positive, it is charged with a high cost. If the product is very low, the gain is very high.
+
+Dual function:
+$$
+\begin{align*}
+g(\nu)&=\inf_x(x^TWx+\sum_i\nu_i(x_1^2-1))\\
+&=\inf_xx^T(W+\bold{diag}(\nu))x-1^T\nu\\
+&=\begin{cases}
+-1^T\nu&W+\bold{diag}(\nu)\succeq0\\
+-\infty&otherwise
+\end{cases}
+\end{align*}
+$$
+Lower bound property:
+$$
+p^*\ge1^T\nu\text{ if }W+\bold{diag}(\nu)\ge0
+$$
+
+#### Lagrange Dual and Conjugate Function
+
+$$
+\min_xf_0(x)\qquad s.t.\quad Ax\preceq b,Cx=d
+$$
+
+Dual function:
+$$
+g(\lambda,\nu)=\inf_{x\in\bold{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
+$$
+The definition of conjugate:
+$$
+f^*(y)=\sup_{x\in\bold{dom}f}(y^Tx-f(x))
+$$
+It may simplifies derivation of dual if the conjugate of $f_0$ is known.
+
+For example, entropy maximization:
+$$
+f_0(x)=\sum_{i=1}^nx_i\log x_i,f^*_0(y)=\sum_{i=1}^ne^{y_i-1}
+$$
+
+### The Dual Problem
+
+Lagrange dual problem:
+$$
+\max_{\lambda,\nu} g(\lambda,\nu)\qquad s.t.\quad\lambda\succeq0
+$$
+
+- finds best lower bound on $p^*$, obtained from Lagrange dual function.
+- a convex optimization problem; optimal value denoted $d^*$.
+- $\lambda,\nu$ are dual feasible if $\lambda\succeq0,(\lambda,\nu)\in\bold{dom}g$.
+- often simplified by making implicit constraint $(\lambda,\nu)\bold{dom}g$ explicit.
+
+For example, the standard form LP and its dual:
+$$
+\min_xc^Tx\qquad s.t.\quad Ax=b,x\succeq0\\\Updownarrow\\
+\max_{\nu}-b^T\nu\qquad s.t.\quad A^T\nu+c\succeq0
+$$
+
+#### Weak and Strong
+
+Weak duality:
+$$
+d^*\le p^*
+$$
+
+- always holds (for convex and nonconvex problems)
+
+- can be used to find nontrivial lower bounds for difficult problems
+
+  for example, solving SDP
+  $$
+  \max-1^T\nu\qquad s.t.\quad W+\bold{diag}(\nu)\succeq0
+  $$
+  gives a lower bound for the two-way partitioning problem.
+
+Strong duality:
+$$
+d^*=p^*
+$$
+
+- does not hold in general
+- (usually) holds for convex problems
+- conditions that guarantee strong duality in convex problems are called constraint qualifications
+
+#### Slater’s Constraint Qualification
+
+Strong duality holds for a convex problem:
+$$
+\min_xf_0(x)\qquad s.t.\quad f_i(x)\le0,i=1,...,m,Ax=b
+$$
+If it is strictly feasible, i.e.,:
+$$
+\exist x\in\bold{int}D:f_i(x)<0,i=1,...,m,Ax=b
+$$
+Then, there is $p^*=d^*$.
+
+- also guarantees that the dual optimum is attained (if $p^*>-\infty$)
+- can be sharpened: e.g. can replace $$
