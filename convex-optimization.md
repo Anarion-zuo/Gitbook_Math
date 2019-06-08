@@ -1626,4 +1626,108 @@ $$
 Then, there is $p^*=d^*$.
 
 - also guarantees that the dual optimum is attained (if $p^*>-\infty$)
-- can be sharpened: e.g. can replace $$
+- can be sharpened: e.g. can replace $\bold{int}D$ with $\bold{relint}D$ (interior relative to affine hull); linear inequalities do not need to hold with strict inequality,…
+- there exists many other types of constraint qualifications.
+
+#### Inequality Form LP
+
+Primal problem:
+$$
+\min c^Tx\qquad s.t. Ax\preceq b
+$$
+Dual function:
+$$
+g(\lambda)=\inf_x((c+A^T\lambda)^Tx-b^T\lambda)=\begin{cases}
+-b^T\lambda&A^T\lambda+c=0\\
+-\infty&otherwise
+\end{cases}
+$$
+Dual problem:
+$$
+\max-b^T\lambda\qquad s.t.A^T\lambda+c=0,\lambda\succeq0
+$$
+
+- from Slater’s condition: $p^*=d^*$ if $A\tilde x\prec b$ for some $\tilde x$.
+- in fact, $p^*=d^*$ except when primal and dual are infeasible.
+
+#### Quadratic Program
+
+Primal problem (assume $P\in S_{++}^n$):
+$$
+\min_xx^TPx\qquad s.t.Ax\preceq b
+$$
+Dual function:
+$$
+g(\lambda)=\inf_x(x^TPx+\lambda^T(Ax-b))=-\frac{1}{4}\lambda^TAP^{-1}A^T\lambda-b^T\lambda
+$$
+Dual problem:
+$$
+\max_\lambda-\frac{1}{4}\lambda^TAP^{-1}A^T\lambda-b^T\lambda\qquad s.t.\lambda\succeq0
+$$
+
+- from Slater’s condition: $p^*=d^*$ if $A\tilde x\prec b$ for some $\tilde x$.
+- in fact, $p^*=d^*$ always holds.
+
+#### Geometric Interpretation
+
+For simplicity, consider problems with one constraint $f_1(x)\le0$.
+
+Dual function:
+$$
+g(\lambda)=\inf_{(u,t)\in G}(t+\lambda u),G=\{(f_1(x),f_0(x))|x\in D\}
+$$
+The line $t=-\lambda u+g(\lambda)$‘s intersection is $g(\lambda)$. For a fixed $\lambda$, the slope of the line is fixed and the line is tangent to $G$ at the point with smallest $g(\lambda)$, the intersection.
+
+![1559980240075](assets/1559980240075.png)
+
+The region on the right hand side of $t$-axis is not feasible, for there has to be $f_1(x)\le0$.
+
+#### Complementary Slackness
+
+Assume strong duality holds, $x^*$ is primal optimal, $(\lambda^*,\nu^*)$ is dual optimal.
+$$
+\begin{align*}
+f_0(x^*)=g(\lambda^*,\nu^*)=&\inf_x(f_0(x)+\sum_{i=1}^m\lambda_i^*f_i(x)+\sum_{i=1}^p\nu_i^*h_i(x))\\\le&f_0(x^*)+\sum_{i=1}^m\lambda_i^*f_i(x^*)+\sum_{i=1}^p\nu_i^*h_i(x^*)\\\le&f_0(x^*)
+\end{align*}
+$$
+Hence, the two inequalities hold with equality.
+$$
+\sum_{i=1}^m\lambda_i^*f_i(x^*)=0
+$$
+
+- $x^*$ minimizes $L(x,\lambda^*,\nu^*)$.
+- $\lambda_i^*f_i(x^*)=0,\forall i$, known as complementary slackness.
+
+$$
+\lambda_i^*>0\Rightarrow f_i(x^*)=0,f_i(x^*)<0\Rightarrow\lambda_i^*=0
+$$
+
+### Karush-Kuhn-Tucker (KKT) Condition
+
+The following four conditions are called KKT conditions (for a problem with differentiable $f_i,h_i$):
+
+1. Primal constraints: $f_i(x)\le0,i=1,...,m,h_i(x)=0,i=1,...,p$
+2. Dual constraints: $\lambda\succeq0$
+3. Complementary slackness: $\lambda_if_i(x)=0,i=1,...,m$
+4. Gradient of Lagrangian with respect to $x$ vanishes:
+
+$$
+\nabla f_0(x)+\sum_{i=1}^m\lambda_i\nabla f_i(x)+\sum_{i=1}^p\nu_i\nabla h_i(x)=0
+$$
+
+If strong duality holds and $x,\lambda,\nu$ are optimal, KKT must hold hold.
+
+#### KKT for Convex Problems
+
+If $\tilde x,\tilde\lambda,\tilde\nu$ satisfy KKT for a convex problem, they are optimal:
+
+- from complementary slackness: $f_0(\tilde x)=L(\tilde x,\tilde\lambda,\tilde\nu)$
+- from 4th condition (and convexity): $g(\tilde\lambda,\tilde\nu)=L(\tilde x,\tilde\lambda,\tilde\nu)$
+
+Hence, $f_0(\tilde x)=g(\tilde\lambda,\tilde\nu)$. This shows the strict condition for strong duality.
+
+If Slater’s condition is satisfied:
+$x$ is optimal if and only if there exists $\lambda,\nu$ that satisfy KKT conditions.
+
+- recall that Slater implies strong duality, and dual optimum is attained
+- generalizes optimality condition $\nabla f_0(x)=0$ for unconstrained problems
