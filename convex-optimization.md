@@ -1558,7 +1558,7 @@ Dual function:
 $$
 g(\lambda,\nu)=\inf_{x\in\bold{dom}f_0}(f_0(x)+(A^T\lambda+C^T\nu)^Tx-b^T\lambda-d^T\nu)=-f_0^*(-A^T\lambda-C^T\nu)-b^T\lambda-d^T\nu
 $$
-The definition of conjugate:
+fThe definition of conjugate:
 $$
 f^*(y)=\sup_{x\in\bold{dom}f}(y^Tx-f(x))
 $$
@@ -1715,7 +1715,7 @@ $$
 \nabla f_0(x)+\sum_{i=1}^m\lambda_i\nabla f_i(x)+\sum_{i=1}^p\nu_i\nabla h_i(x)=0
 $$
 
-If strong duality holds and $x,\lambda,\nu$ are optimal, KKT must hold hold.
+If strong duality holds and $x,\lambda,\nu$ are optimal, KKT must hold.
 
 #### KKT for Convex Problems
 
@@ -1727,7 +1727,115 @@ If $\tilde x,\tilde\lambda,\tilde\nu$ satisfy KKT for a convex problem, they are
 Hence, $f_0(\tilde x)=g(\tilde\lambda,\tilde\nu)$. This shows the strict condition for strong duality.
 
 If Slater’s condition is satisfied:
-$x$ is optimal if and only if there exists $\lambda,\nu$ that satisfy KKT conditions.
+	$x$ is optimal if and only if there exists $\lambda,\nu$ that satisfy KKT conditions.
 
 - recall that Slater implies strong duality, and dual optimum is attained
 - generalizes optimality condition $\nabla f_0(x)=0$ for unconstrained problems
+
+#### Water-Filling Example
+
+Try to allocate some power to a bunch of devices.
+$$
+\min_x-\sum_{i=1}^n\log(x_i+\alpha_i)\qquad s.t.x\succeq0,1^Tx=1
+$$
+$x$ is optimal if $x\succeq0, 1^Tx=1$, and there exist $\lambda\in\R^n,\nu\in\R$ such that:
+$$
+\lambda\succeq0,\lambda_ix_i=0,\frac{1}{x_i+\alpha_i}+\lambda_i=\nu
+$$
+
+-  if $\nu<1/\alpha_i$: $\lambda_i=0$ and $x_i=1/\nu-\alpha_i$
+- if $\nu\ge1/\alpha_i$: $\lambda_i=\nu-1/\alpha_i$ and $x_i=0$
+- determine $\nu$ from:
+
+$$
+1^Tx=\sum_{i=1}^n\max\{0,1/\nu-\alpha_i\}=1
+$$
+
+#### Perturbation and Sensitivity Analysis
+
+(Unperturbed) optimization problem:
+$$
+\min_xf_0(x)\\s.t.\begin{cases}
+f_i(x)\le0&i=1,...,m\\
+h_i(x)=0&i=1,...,p
+\end{cases}
+$$
+Its dual:
+$$
+\max_{\lambda,\nu}g(\lambda,\nu)\qquad s.t.\lambda\succeq0
+$$
+Perturbed problem:
+$$
+\min_xf_0(x)\\s.t.\begin{cases}
+f_i(x)\le u_i&i=1,...,m\\
+h_i(x)=v_i&i=1,...,p
+\end{cases}
+$$
+Its dual:
+$$
+\max_{\lambda,\nu}g(\lambda,\nu)-u^T\lambda-v^T\nu\qquad s.t.\lambda\succeq0
+$$
+Assume strong duality holds for unperturbed problem, ant that $\lambda^*,\nu^*$ are dual optimal for unperturbed problem.
+
+Apply weak duality to perturbed problem, and this holds for all $u,v$:
+$$
+p^*(u,v)\ge g(\lambda^*,\nu^*)-u^T\lambda^*-v^T\nu^*=p^*(0,0)-u^T\lambda^*-v^T\nu^*
+$$
+Sensitivity interpretation:
+
+- if $\lambda_i^*$ large: $p^*$ increases greatly if we tighten constraint $i$ (set $u_i<0$)
+
+- if $\lambda_i^*$ small: $p^*$ does not decrease much if we loosen constraint $i$ (set $u_i>0$)
+
+- if $\nu_i^*$ large and positive: $p^*$ increases greatly if we take $v_i<0$;
+
+  if $v_i^*$ large and negative: $p^*$ increases greatly if we take $v_i>0$
+
+- if $\nu_i^*$ small and positive: $p^*$ does not decrease much if we take $v_i>0$;
+
+  if $v_i^*$ small and negative: $p^*$ does not decrease much if take $v_i<0$
+
+Local sensitivity:
+$$
+\lambda_i^*=-\frac{\partial p^*(0,0)}{\partial u_i},\nu_i^*=-\frac{\partial p^*(0,0)}{\partial v_i}
+$$
+
+### Problem Reformulations
+
+#### Introducing New Variables and Equality Constraints
+
+$$
+\min_xf_0(Ax+b)
+$$
+
+- dual function is constant: $g=\inf_xL(x)=\inf_xf_0(Ax+b)=p^*$, nothing is done.
+- we have strong duality, while dual is useless
+
+Reformulated problem:
+$$
+\min_yf_0(y)\quad s.t.Ax+b-y=0
+$$
+Dual problem:
+$$
+\max b^T\nu-f_0^*(\nu)\quad s.t.A^T\nu=0
+$$
+Dual function:
+$$
+g(\nu)=\inf_{x,y}(f_0(y)-\nu^Ty+\nu^TAx+b^T\nu)=\begin{cases}
+-f_0^*(\nu)+b^T\nu&A^T\nu=0\\
+-\infty&otherwise
+\end{cases}
+$$
+For example: $\min||Ax-b||$, dual function:
+$$
+g(\nu)=\begin{cases}
+b^T\nu+\inf_y(||y||+\nu^Ty)&A^T\nu=0\\
+-\infty&otherwise
+\end{cases}=\begin{cases}
+b^T\nu&A^T\nu=0,||\nu||_*\le1\\
+-\infty&otherwise
+\end{cases}
+$$
+
+#### Implicit Constraints
+
